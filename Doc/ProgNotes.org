@@ -1,0 +1,67 @@
+# Notes de programmation pour la phase 2 du projet de classement des 
+# Dernière modification <2015-01-05 Mon 14:11>
+
+* Compilation des librairies OpenCV
+
+** Liens consultés
+*** [[http://stackoverflow.com/questions/17884526/opencv-background-subtraction-from-a-still-image][BG subtraction from still images SO]]
+Scripte c++
+
+[[http://stackoverflow.com/questions/19221877/opencv-how-to-use-createbackgroundsubtractormog][Utilisation createbackgroundsubtractor c++]]
+SO
+
+*** [[http://stackoverflow.com/questions/145270/calling-c-c-from-python][calling c++ from python]]
+ceci est une approche possible. Appeler la fonction en c++ qui fait le background subtraction de la scripte python.
+
+*** [[http://docs.opencv.org/doc/tutorials/introduction/linux_gcc_cmake/linux_gcc_cmake.html#linux-gcc-usage][using open cv wiwth gcc and Cmake]]
+
+** Test cpp avec opencv
+[[file:Essaie_1/DisplayImage.cpp::image%20%3D%20imread(%20argv%5B1%5D,%201%20)%3B][test display image]]
+
+Ça fonctionnne. Il faut compiler avec cmake :
+create a cmake file :
+
+cmake_minimum_required(VERSION 2.8)
+project( DisplayImage )
+find_package( OpenCV REQUIRED )
+add_executable( DisplayImage DisplayImage.cpp )
+target_link_libraries( DisplayImage ${OpenCV_LIBS} )
+
+Generate the executable
+
+cd <DisplayImage_directory>
+cmake .
+make
+
+./DisplayImage lena.jpg
+
+
+** Essaie 1, background subtraction avec c++
+[[file:Essaie_1/bs.cpp::/opencv][code]]
+
+compilation : le code Ne compile pas avec g++. Essaie avec cmake :
+compile en utilisant le code sur SO (opencv2.4 et non 3 comme dans la doc).
+[[http://stackoverflow.com/questions/19221877/opencv-how-to-use-createbackgroundsubtractormog][backsub opencv2 SO]]
+[[file:Essaie_1/backsub2.cpp::/opencv][code2]]
+
+*** Test sur 5 images originales de renards
+1- Renommer en bash les images pour avoir <n>.jpg
+
+for file in *.jpg ; do mv  "${file}" "${n}".jpg; n=$((n+1));  done
+
+J'ai du ajuster le learning rate à 0.1 :
+
+pMOG->operator()(frame, fgMaskMOG, 0.1);
+pMOG2->operator()(frame, fgMaskMOG2, 0.1);
+
+Résultats test 1 :
+
+La soustraction fonctionne, mais le premier frame ne semble pas être analysé.
+Quelques questions :
+
+Pourquoi le waitkey ne fonctionne pas ?
+keyboard = waitKey( 30 );
+
+Pourquoi il y a seulement imshow("FG Mask MOG 2" fgMaskMOG2) qui est montré ?
+Ok, ils sont là. Vaut mieux enregistrer les images :
+

@@ -1,0 +1,106 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{tablefootnote}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+%\usepackage[frenchb]{babel}
+%\usepackage{hyperref}
+%\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{listings}
+
+%\usepackage[demo]{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\newcommand{\mychapter}[2]{
+    \setcounter{chapter}{#1}
+    \setcounter{section}{0}
+    \chapter*{#2}
+    \addcontentsline{toc}{chapter}{#2}
+}
+
+\hypersetup{
+%    colorlinks=true, % make the links colored
+    linkcolor=black, % color TOC links in blue
+%    urlcolor=red, % color URLs in red
+    linktoc=all % 'all' will create links for everything in the TOC
+}
+
+
+\title{Installation of needed dependencies to execute Python Image Classifier}
+\author{Eric Devost}
+\date{April 2015} 
+
+\begin{document}
+\maketitle
+\newpage
+
+
+\section{Python}
+Two branches of Python (Python2.x and Python3.x) are actually developped. Python3.x is the new version and the future of the language, however, there is still limited third-party modules and libraries support for it. While Python3 gathers momentum and more libraries are being supported, the use of Python2.x is recommended. The Classifier script has been developped on Python 2.7.9 build on Dec 11 2014 on Arch Linux (GCC 4.9.2). Without modifications, the classifier will not run on Python3.
+
+\subsection{Python dependencies}
+Here is the list of imported modules needed to execute the script. Efforts have been made to keep the number of required modules as low as possible and multiplatform.
+
+\begin{lstlisting}
+import os
+import cv2
+import cv2.cv as cv
+import numpy as np
+import glob
+from itertools import groupby
+import time
+from datetime import datetime,date
+import shutil
+from gi.repository import GExiv2
+
+\end{lstlisting}
+
+\begin{description}
+\item [import os]
+Used to manipulate path operations with os.path. This is the recommended way for platform independent path manipulations. This module comes with standard Python installation.
+
+\item [import cv2 and import cv2.cv as cv]
+
+OpenCV2 libraries (http://opencv.org). Theses are the main libraries used for images manipulations in the script. The versions used for develloping the script were OpenCV-2.4.9x and OpenCV2.4.10x. The new devellopment branche of OpenCV (OpenCV3) is still in BETA (as of april 2 2015), so the stable branche (OpenCV2) was used. OpenCV does not come with standard Python installation.
+
+\item [import numpy as np] Numpy libraries (http://numpy.org). Used for miscelaneous math operations. This module may or may not come with your standard Python installation, depending on how you installed Python.
+
+\item[import glob] Used to generate lists of files matching given patern. Comes with standard Python installation.
+
+\item [from itertools import groupby] Used to create iterators. Comes with standard Python installation.
+
+\item [import time] Used to manipulate time data. Comes with standard Python installation.
+
+\item [from datetime import datetime, date] Used to format time data. Comes with standard Python installation.
+
+\item [GEexiv2] This is a python wrapper to Exiv2 , libraries to read and write metada. Pyexiv2 (http://http://tilloy.net/dev/pyexiv2/overview.html) is now deprecated and the use of GExiv2 is now recommended. This library is not part of standard Python installation. 
+
+Installation of libexiv2 version 0.21 or newer and of Exiv2 (http://www.exiv2.org) are required.
+
+\end{description}
+
+\section{Linux}
+Everything was installed through distribution package manager. This list is not complete.
+
+\begin{itemize}
+
+\item Python2
+\item Python2-numpy
+\item OpenCV2
+\item Exiv2
+\item python2-exiv2
+\item GExiv2
+\item libgexiv2
+
+\end{itemize}
+
+\section{MacOS}
+\section{Windows}
+
+
+\end{document}
+
+
+

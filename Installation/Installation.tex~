@@ -1,0 +1,33 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{tablefootnote}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+%\usepackage[frenchb]{babel}
+%\usepackage{hyperref}
+%\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+
+%\usepackage[demo]{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\newcommand{\mychapter}[2]{
+    \setcounter{chapter}{#1}
+    \setcounter{section}{0}
+    \chapter*{#2}
+    \addcontentsline{toc}{chapter}{#2}
+}
+
+\hypersetup{
+%    colorlinks=true, % make the links colored
+    linkcolor=black, % color TOC links in blue
+%    urlcolor=red, % color URLs in red
+    linktoc=all % 'all' will create links for everything in the TOC
+}
+
+
+\title{In}
+\author{Eric Devost}
+\date{Mars 2015} 
+
