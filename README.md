@@ -18,7 +18,15 @@ included in the docs/ directory.
 Installation
 =============
 This code is intended to be used with an Ubuntu 14 Vagrant box.
-To install the FoxMask Vagrant box on your computer, clone this
+Thus, to run the software, you need to install Virtualbox and Vagrant:
+- [Virtualbox](https://www.virtualbox.org/)
+- [Vagrant](https://www.vagrantup.com/)
+
+To clone this repository, you need git:
+- [git](https://git-scm.com/)
+
+Once theses dependencies are installed you can proceed to install
+the FoxMask box on your computer. Simply clone this repository
 repository and run *vagrant up*.
 
 - git clone https://github.com/edevost/foxmask.git
@@ -31,15 +39,6 @@ Please see the file called LICENSE
 
 Contact
 =======
-
-
-Dependencies
-============
-This software is intended to be used on a virtual machine with vagrant.
-Needed dependencies to get and run the software:
-- [Virtualbox](https://www.virtualbox.org/)
-- [Vagrant](https://www.vagrantup.com/)
-- [git](https://git-scm.com/)
 
 
 Software structure
