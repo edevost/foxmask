@@ -37,7 +37,7 @@
 
 
 //writes the foreground masks to the below location if WRITEMASK is defined in main.hpp
-const string mask_save_path = "/home/vagrant/foxmask/";
+const string mask_save_path = "/vagrant/foxmask/";
 
 /* read params file*/;
 
@@ -46,7 +46,7 @@ float getpar()
 float datas;
      ifstream infile;
 //float datas;
-     infile.open("/home/vagrant/foxmask/cpplibs/foreground_detection_code/code/params.txt");
+     infile.open("/vagrant/foxmask/cpplibs/foreground_detection_code/code/params.txt");
      infile >> datas;
      cout << "data" << endl;
      cout << datas << endl;
