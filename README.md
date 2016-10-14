@@ -38,19 +38,8 @@ Please see the file called LICENSE
 
 Contact
 =======
-
-
-Software structure
-===================
-This software consist of two main python components
-
-- generatemasks.py
-- foxcountRW.py
-
-and two cpp libraries
-
-- background_estimation_code
-- foreground_detection_code
+Feel free to contact me if you have any comments or questions.
+ericdevost@gmail.com
 
 Usage
 =====
