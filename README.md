@@ -18,7 +18,7 @@ Installation
 =============
 This code is intended to be used with an Ubuntu 14 Vagrant box.
 Thus, to run the software, you need to install Virtualbox and Vagrant:
-- [Virtualbox](https://www.virtualbox.org/)
+- [Virtualbox](https://www.virtualbox.org/) (version 5.1)
 - [Vagrant](https://www.vagrantup.com/)
 
 To clone this repository, you need git:
@@ -31,6 +31,12 @@ repository and run *vagrant up*.
 - git clone https://github.com/edevost/foxmask.git
 - cd foxmask
 - vagrant up
+
+
+Hardware requirements
+=====================
+To run this virtual environment, you need at least 13GB of free disk space and
+4 GB of RAM. Virtualization needs to be enabled for you cpu.
 
 Licensing
 =========
