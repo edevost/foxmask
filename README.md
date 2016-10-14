@@ -51,3 +51,5 @@ You first need to generate the masks with generatemasks.py.
 This will take as input the sample images located in the Images folder
 and creates Masks in the MasksResults folder. Once the masks are
 generated, you can run foxcount.py to count the foxes on the images.
+
+- python foxcount.py
