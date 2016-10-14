@@ -4,11 +4,10 @@ What is it ?
 ==============
 FoxMask has been created to give researchers a tool to
 analyze images taken by RECONYX cameras. Theses cameras
-are triggered by a motion detection system and
-
-
-detection and subtraction. It is written in Python and C++.
-The algorithm has been written to be able to analyse
+are triggered by a motion detection system and FoxMask has
+been written to be able to isolate moving object with very
+short image sequences (minimum of 5). It is written in
+Python and C++.
 
 Documentation
 =============
@@ -60,7 +59,6 @@ in the Images folder where you will find 100 images of arctic fox den.
 You first need to generate the masks with generatemasks.py.
 - python generatemasks.py
 
-This will take as input the sample images located in the Images folder.
-
-The masks will then be
-masks, you can run foxcountRW.py on theses masks. See code for detailed documentation.
+This will take as input the sample images located in the Images folder
+and creates Masks in the MasksResults folder. Once the masks are
+generated, you can run foxcount.py to count the foxes on the images.
