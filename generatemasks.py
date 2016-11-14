@@ -175,7 +175,7 @@ print "done"
 
 # function to compute best maxgap
 """
-To doucument
+To document
 """
 
 tempimpg2 = impg
