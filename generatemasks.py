@@ -1,7 +1,8 @@
 
 import csv
 import sys
-sys.path.append("/usr/local/lib/python2.7/site-packages")
+ver = "python{}.{}/site-packages" .format(sys.version_info.major,sys.version_info.minor)
+sys.path.append("/usr/local/lib/" + ver)
 import os
 import cv2
 import numpy as np
@@ -15,8 +16,7 @@ import re
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from scipy.stats.stats import pearsonr
-from scipy.stats.stats import linregress
+from scipy.stats.stats import pearsonr, linregress
 import pylab
 import random
 from numpy import genfromtxt
@@ -175,7 +175,7 @@ print "done"
 
 # function to compute best maxgap
 """
-To doucument
+To document
 """
 
 tempimpg2 = impg

@@ -1,30 +1,22 @@
-
-import csv
-import sys
-import os
+import csv, sys, os
 import cv2
-import cv2.cv as cv
-import numpy as np
-import glob
+import cv2.cv as cv,
+import numpy as np, glob
 from itertools import groupby
 import time
-from datetime import datetime,date
+from datetime import datetime, date
 #from gi.repository import GExiv2
-import shutil
-import exiftool
-import re
-import pandas as pd
+import shutil, exiftool, re, pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from scipy.stats.stats import pearsonr
-from scipy.stats.stats import linregress
+from scipy.stats.stats import pearsonr, linregress
 import pylab
 import random
 import xlrd
 
 ''' 
 This script will take the output of generatemasks.py and
-superpose them to the original images to caracterise each
+superpose them to the original images to characterize each
 objects and count them.
 '''
 
@@ -240,7 +232,7 @@ def prepOb():
 
 # ----------------------------------------------------------------------
 
-# Function to perform youg segmentation
+# Function to perform young segmentation
 def youngsSeg():
     # # if for contrast =================================
     # if sdGrey[0] > 0.7:
@@ -593,5 +585,4 @@ finalresults.columns = ['image','foxcount']
 finalresults_sorted = finalresults.sort(['foxcount'],ascending=False)
 ninetyfive = int(round(0.05 * len(finalresults)))
 
-print "Your reproductive success should be in one of theses images",finalresults_sorted[:ninetyfive]
-
+print "Your reproductive success should be in one of these images",finalresults_sorted[:ninetyfive]
