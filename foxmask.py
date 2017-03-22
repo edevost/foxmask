@@ -393,7 +393,7 @@ kernel   = np.ones((10, 10), np.uint8)
 
 
 #for i in range(maskslist.index(maskslist[starti]), maskslist.index(maskslist[stopi])):
-for i in range(0, (len(maskslist)-1)):
+for i in range(len(maskslist)):
     print i
     print "Analysing", maskslist[i]
     # Loading current Frame
