@@ -56,7 +56,7 @@ vagrant up
 
 At the end of the installation, the virtual box is automatically launched. If not, open VirtualBox and run the FoxMask Box (see `Screenshot #1`). You will see the Ubuntu 14.04 interface. In this virtual environment, your user name is **vagrant** and the associated password is **vagrant**.
 
-![Screenshot \#1: Launch FoxMask Box](screenshot.png)
+![Screenshot \#1: Launch FoxMask Box](screenshot-1.png)
 
 ### Configuration
 
