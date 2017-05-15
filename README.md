@@ -68,7 +68,7 @@ Before using FoxMask, a final configuration step is necessary. Make sure you hav
 
 The idea is to authorize the repository clone on the host OS (your computer) to be directly accessible by the guest OS (FoxMask Box). This is very useful to put images to be analyzed.
 
-Open VirtualBox and access to the FoxMask Box settings (`Screenshot #2`).
+Open VirtualBox and access the FoxMask Box settings (`Screenshot #2`).
 
 ![](screenshot-2.png)
 
@@ -83,7 +83,7 @@ _Screenshot \#3: Authorize shared folder between host and guest OS_
 
 2. **Folder permissions**
 
-Secondly, you have to modify permissions of two folders: 1) the shared folder (named `sf_vagrant`, located on the `/media` folder) and another folder located at the guest OS root (named `/vagrant`). Type the following command lines on the Ubuntu shell:
+Secondly, you have to modify permissions of two folders: 1) the shared folder (named `sf_vagrant`, located on the `/media` folder) and another folder located at the root of the guest OS (named `vagrant`). Type the following command lines on the Ubuntu shell:
 
 ```bash
 sudo usermod -aG vboxsf vagrant
@@ -93,11 +93,11 @@ sudo chmod -R ugo+rw /vagrant
 
 **Important:** restart the guest OS (Ubuntu) for the changes to take affect.
 
-Now, you can access to the content of the shared folder, i.e. the foxmask repository (`sf_vagrant`) from the guest OS.
+Now, you can access the content of the shared folder, i.e. the foxmask repository (`sf_vagrant`) from the guest OS.
 
 3. **Symbolic link**
 
-To be run FoxMask needs to be located on the `/vagrant` folder. But, this is not a shared folder. So we will create a symbolic link between the shared folder `/media/sf_vagrant` and the folder `/vagrant`.
+To be run FoxMask needs to be located at the `/vagrant` folder. But, this is not a shared folder. So we will create a symbolic link between the shared folder `/media/sf_vagrant` and the folder `/vagrant`. Type the following command lines on the Ubuntu shell:
 
 ```bash
 sudo rm -r /vagrant
@@ -105,21 +105,15 @@ sudo ln -s /media/sf_vagrant/ /
 sudo mv /sf_vagrant /vagrant
 ```
 
-Now, all the content of the shared folder is also accessible from the `/vagrant` folder (like Dropbox when you use a single account from different platforms). If you add/modify/delete a file from `/vagrant`, changes will be passed on the shared folder `/media/sf_vagrant` (and the host OS).
-
-For instance, if you copy images on the shared folder in the host OS, these files will be accessible both via the `/media/sf_vagrant` and `/vagrant` folders of Ubuntu.
+Now, all the content of the shared folder is also accessible from the `/vagrant` folder. If you add/modify/delete a file from `/vagrant`, changes will be passed on the shared folder `/media/sf_vagrant` and the repository clone on your host OS (like using Dropbox with one single account from different platforms). For instance, if you copy images on the shared folder in the host OS, these files will be accessible both via the `/media/sf_vagrant` and `/vagrant` folders of Ubuntu.
 
 ### Usage
 
-This software is shipped with a sample images directory (**images/example/**) where you will find 50 images of Arctic fox.
-You first need to generate the masks with generatemasks.py.
-- python generatemasks.py
+This software is shipped with a sample images directory (**images/example/**) where you will find 50 images of Arctic fox. FoxMask consists of two Python scripts:
 
-This will take as input the sample images located in the Images folder
-and creates Masks in the MasksResults folder. Once the masks are
-generated, you can run foxcount.py to count the foxes on the images.
+- `parameters.py`, ...
+- `foxmask.py`, ...
 
-- python foxcount.py
 
 
 ### Licensing
