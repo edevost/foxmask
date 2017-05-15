@@ -62,11 +62,11 @@ _Screenshot \#1: FoxMask Box Launch_
 
 ### Configuration
 
-Before using FoxMask, a final configuration step is necessary. Make sure you have open and close FoxMask Box at least once.
+Before using FoxMask, a final configuration step is necessary. Make sure you have opened and closed FoxMask Box at least once.
 
 1. **Shared folder**
 
-The idea is to authorize the repository clone on the host OS (your computer) to be directly accessible on the guest OS (FoxMask Box). This is very useful to put images to be analyzed.
+The idea is to authorize the repository clone on the host OS (your computer) to be directly accessible by the guest OS (FoxMask Box). This is very useful to put images to be analyzed.
 
 Open VirtualBox and access to the FoxMask Box settings (`Screenshot #2`).
 
@@ -78,30 +78,22 @@ Then, make sure the settings look like the `Screenshot #3`.
 
 ![](screenshot-3.png)
 
-_Screenshot \#3: Authorize shared folder between host and guest_
+_Screenshot \#3: Authorize shared folder between host and guest OS_
 
 
 2. **Folder permissions**
 
-xxx
+Secondly, you have to modify permissions of two folders: 1) the shared folder (named `sf_vagrant`) and another folder located at the guest OS root (named `/vagrant`). Type the following command lines on Ubuntu shell:
 
 ```bash
 sudo usermod -aG vboxsf vagrant
-```
-
-xxx
-
-```bash
 sudo chmod -R ugo+rw /media/sf_vagrant
-```
-
-xxx
-
-```bash
 sudo chmod -R ugo+rw /vagrant
 ```
 
-Reboot the guest OS (Ubuntu) for the changes to take affect.
+**Important:** restart the guest OS (Ubuntu) for the changes to take affect.
+
+Now, you can access to the content of the shared folder (`sf_vagrant`) in the guest OS.
 
 3. **Symbolic link**
 
