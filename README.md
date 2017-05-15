@@ -54,7 +54,7 @@ cd foxmask
 vagrant up
 ```
 
-At the end of the installation, the virtual box is automatically launched. If not, open VirtualBox and run the FoxMask Box by 1) selecting the box, and 2) clicking on the _Run_ button (see `Screenshot #1`). You will see the Ubuntu 14.04 interface. In this virtual environment, your user name is **vagrant** and the associated password is **vagrant**.
+At the end of the installation, the virtual box is automatically launched. If not, open VirtualBox and run the FoxMask Box by 1) selecting the box, and 2) clicking on the _Start_ button (`Screenshot #1`). You will see the Ubuntu 14.04 interface. In this virtual environment, your user name is **vagrant** and the associated password is **vagrant**.
 
 ![](screenshot-1.png)
 
@@ -66,11 +66,15 @@ Before using FoxMask, a final configuration step is necessary. Make sure you hav
 
 1. **Shared folder**
 
-xxx
+The idea is to authorize the repository clone on the host OS (your computer) to be directly accessible on the guest OS (FoxMask Box). This is very useful to put images to be analyzed.
+
+Open VirtualBox and access to the FoxMask Box settings (`Screenshot #2`).
 
 ![](screenshot-2.png)
 
 _Screenshot \#2: Open FoxMask Box settings_
+
+Then, make sure the settings look like the `Screenshot #3`.
 
 ![](screenshot-3.png)
 
