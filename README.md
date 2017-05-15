@@ -56,7 +56,7 @@ vagrant up
 
 At the end of the installation, the virtual box is automatically launched. If not, open VirtualBox and run the FoxMask Box by 1) selecting the box, and 2) clicking on the _Start_ button (`Screenshot #1`). You will see the Ubuntu 14.04 interface. In this virtual environment, your user name is **vagrant** and the associated password is **vagrant**.
 
-![](screenshot-1.png)
+![](misc/screenshot-1.png)
 
 _Screenshot \#1: FoxMask Box Launch_
 
@@ -70,13 +70,13 @@ The idea is to authorize the repository clone on the host OS (your computer) to 
 
 Open VirtualBox and access the FoxMask Box settings (`Screenshot #2`).
 
-![](screenshot-2.png)
+![](misc/screenshot-2.png)
 
 _Screenshot \#2: Open FoxMask Box settings_
 
 Then, make sure the settings look like the `Screenshot #3`.
 
-![](screenshot-3.png)
+![](misc/screenshot-3.png)
 
 _Screenshot \#3: Authorize shared folder between host and guest OS_
 
@@ -124,9 +124,20 @@ User needs to set different parameters in the `parameters.py` file:
 - `rmmasks`, the fate of generated masks (0: kept OR 1: deleted \[recommended\]);
 - `cpphotos`, if 1, images with detected objects are copied in a subfolder.
 
+Read comments in this file for further informations.
+
 **Note:** raw images are not modified.
 
-FoxMask program is shipped with a sample images directory (**images/example/**) where you will find 50 jpeg images of Arctic fox.
+Once the `parameters.py` file is adapted to your needs, it's time to run FoxMask. Open the Ubuntu shell and type:
+
+```bash
+cd /vagrant
+python foxmask.py
+```
+
+At the end of the process, a CSV file is exported with the image names and the presence of detected objects (0 or 1). If required, masks and images with detected objects are also copied in subfolders.
+
+FoxMask program is shipped with a sample images directory (**images/example/**) where you will find 50 jpeg images of Arctic fox. We encourage you to test FoxMask on this sample of images.
 
 
 ### Licensing
