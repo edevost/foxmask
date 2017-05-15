@@ -1,5 +1,10 @@
-To change permission of shared folers
+To change permission of shared folders
 
-sudo adduser vagrant vboxsf
+sudo usermod -aG vboxsf vagrant
 sudo chmod -R ugo+rw /media/sf_vagrant
 ---> Reboot
+
+
+sudo rm -r /vagrant
+sudo ln -s /media/sf_vagrant/ /
+sudo mv /sf_vagrant /vagrant

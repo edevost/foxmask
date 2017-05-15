@@ -9,6 +9,14 @@ directory located within the /vagrant/foxmask/Images directory.
 
 
 '''
+################################################################################
+################################################################################
+################################################################################
+'''
+
+
+
+'''
 Importing Python libraries
 '''
 
@@ -48,6 +56,17 @@ time1 = time.time()
 
 
 for folder in range(len(imagesDir)):
+
+
+
+    '''
+    Remove previous masks (if necessary)
+    '''
+
+
+    if os.path.exists('./MasksResults'):
+        shutil.rmtree('./MasksResults')
+
 
 
     '''
@@ -305,7 +324,7 @@ for folder in range(len(imagesDir)):
 
 
     '''
-    FUNCTION DEFINITION - Find significant objects (in size)
+    FUNCTION DEFINITION - Find significant objects (based on their size)
     '''
 
 
@@ -334,13 +353,31 @@ for folder in range(len(imagesDir)):
 
 
     '''
-    Creation of a the final folder
+    Creation of final folders
     '''
 
 
 
     if not os.path.exists(outputDir + "Results/"):
         os.makedirs(outputDir + "Results/")
+
+    if not os.path.exists(outputDir + "Results/tables/"):
+        os.makedirs(outputDir + "Results/tables/")
+
+    if not os.path.exists(outputDir + "Results/tables/" + ouname[folder]):
+        os.makedirs(outputDir + "Results/tables/" + ouname[folder])
+
+    if not os.path.exists(outputDir + "Results/images/"):
+        os.makedirs(outputDir + "Results/images/")
+
+    if not os.path.exists(outputDir + "Results/images/" + ouname[folder]):
+        os.makedirs(outputDir + "Results/images/" + ouname[folder])
+
+    if not os.path.exists(outputDir + "Results/masks/"):
+        os.makedirs(outputDir + "Results/masks/")
+
+    if not os.path.exists(outputDir + "Results/masks/" + ouname[folder]):
+        os.makedirs(outputDir + "Results/masks/" + ouname[folder])
 
 
 
@@ -395,10 +432,31 @@ for folder in range(len(imagesDir)):
                 res = detection()
             # Export in CSV
             resultrow = [maskslist[i], res, minsize[k]]
-            myfile = open(outputDir + 'Results/' + ouname[folder] + '-' + str(minsize[k]) + '.csv', 'a')
+            myfile = open(outputDir + 'Results/tables/' + ouname[folder] + '/' + ouname[folder] + '-' + str(minsize[k]) + '.csv', 'a')
             wr = csv.writer(myfile)
             wr.writerow(resultrow)
             myfile.close()
+
+            # Copy photo
+            if cpphotos == 1 and (isinstance(minsize, int) or (isinstance(minsize, list) and len(minsize) == 1)):
+                phtname = maskslist[i]
+                phtname = re.sub('.png|./MasksResults/', '', phtname)
+                if phtname + '.JPG' in os.listdir(imagesDir[folder]):
+                    phtname = phtname + '.JPG'
+                elif phtname + '.jpg' in os.listdir(imagesDir[folder]):
+                    phtname = phtname + '.jpg'
+                src = imagesDir[folder] + phtname
+                dest = outputDir + 'Results/images/' + ouname[folder] + '/' + phtname
+                if res == 1:
+                    shutil.copy(src, dest)
+
+            # Copy masks
+            if rmmasks == 0:
+                src = maskslist[i]
+                maskname = re.sub('./MasksResults/', '', maskslist[i])
+                dest = outputDir + 'Results/masks/' + ouname[folder] + '/' + maskname
+                shutil.copy(src, dest)
+
 
 
 
@@ -406,8 +464,8 @@ for folder in range(len(imagesDir)):
     Remove Masks folder
     '''
 
-    if rmmasks == 1:
-        shutil.rmtree(resmasks)
+    if os.path.exists('./MasksResults'):
+        shutil.rmtree('./MasksResults')
 
 
 

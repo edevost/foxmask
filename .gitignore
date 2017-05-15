@@ -1,2 +1,5 @@
 .vagrant/*
 *~
+.DS_store
+images/.DS_store
+images/examples/.DS_store
