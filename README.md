@@ -2,13 +2,18 @@
 
 A Python program to automatically detect moving objects on images
 
+
 ### What is it?
 
-FoxMask has been created to give user a tool to automatically analyze images taken by RECONYX cameras. Theses cameras are triggered by a motion detection system and FoxMask has been written to be able to isolate moving object with very short image sequences (minimum of 5). It is written in Python and depends on C++ libraries.
+FoxMask has been created to give user a tool to automatically analyze images taken by RECONYX cameras. Theses cameras are triggered by a motion detection system and FoxMask has been written to be able to isolate moving objects with very short image sequences (minimum of 5). It is written in Python and depends on C++ libraries.
+
 
 ### Hardware requirements
 
-This Python program is intended to be used within a virtual environment including an Ubuntu 14.04 Vagrant box. To run this virtual environment, you need at least 13GB of free disk space and 4 GB of RAM. Note: virtualization needs to be enabled for your CPU.
+This Python program is intended to be used within a virtual environment including an Ubuntu 14.04 Vagrant box. To run this virtual environment, you need at least 13 GB of free disk space and 4 GB of RAM.
+
+**Note:** virtualization needs to be enabled for your CPU.
+
 
 ### Installation
 
@@ -49,25 +54,21 @@ cd foxmask
 vagrant up
 ```
 
-At the end of the installation, the virtual box is automatically launched. If not, open VirtualBox and run the FoxMask Box. You will see the Ubuntu 14.04 interface. In this virtual environment, your user name is **vagrant** and the associated password is **vagrant**.
+At the end of the installation, the virtual box is automatically launched. If not, open VirtualBox and run the FoxMask Box (see `Screenshot #1`). You will see the Ubuntu 14.04 interface. In this virtual environment, your user name is **vagrant** and the associated password is **vagrant**.
+
 
 ### Configuration
 
+Before using FoxMask, a final configuration step is necessary. Make sure you have open and close FoxMask Box at least once.
+
+- Shared folder
+
+- Folder permissions
 
 
-Licensing
-=========
-Please see the file called LICENSE
+### Usage
 
-Contact
-=======
-Feel free to contact me if you have any comments or questions.
-ericdevost@gmail.com
-
-Usage
-=====
-This software is shipped with a sample images directory, located
-in the Images folder where you will find 100 images of arctic fox den.
+This software is shipped with a sample images directory (**images/example/**) where you will find 50 images of Arctic fox.
 You first need to generate the masks with generatemasks.py.
 - python generatemasks.py
 
@@ -78,12 +79,16 @@ generated, you can run foxcount.py to count the foxes on the images.
 - python foxcount.py
 
 
+### Licensing
 
-**mpd**
+Please see the file called LICENSE.
 
 
+### Contact
+
+Feel free to contact me if you have any comments or questions at ericdevost@gmail.com
 
 
-### Documentation
+### Reference
 
-The documentation available as of the date of this release is included in the docs/ directory.
+Devost É, Casajus N, Lai S & Berteaux D (9999) FOXMASK: a new automated tool for animal screening on camera trap images. **Methods in Ecology and Evolution**, submitted.
