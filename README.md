@@ -54,20 +54,23 @@ cd foxmask
 vagrant up
 ```
 
-At the end of the installation, the virtual box is automatically launched. If not, open VirtualBox and run the FoxMask Box (see `Screenshot #1`). You will see the Ubuntu 14.04 interface. In this virtual environment, your user name is **vagrant** and the associated password is **vagrant**.
+At the end of the installation, the virtual box is automatically launched. If not, open VirtualBox and run the FoxMask Box by 1) selecting the box, and 2) clicking on the _Run_ button (see `Screenshot #1`). You will see the Ubuntu 14.04 interface. In this virtual environment, your user name is **vagrant** and the associated password is **vagrant**.
 
 ![](screenshot-1.png)
 
-_Screenshot \#1: Launch FoxMask Box_
+_Screenshot \#1: FoxMask Box Launch_
 
 ### Configuration
 
 Before using FoxMask, a final configuration step is necessary. Make sure you have open and close FoxMask Box at least once.
 
-- Shared folder
+1. Shared folder
 
-- Folder permissions
+xxx
 
+2. Folder permissions
+
+xxx
 
 ### Usage
 
