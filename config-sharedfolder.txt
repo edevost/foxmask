@@ -2,6 +2,7 @@ To change permission of shared folders
 
 sudo usermod -aG vboxsf vagrant
 sudo chmod -R ugo+rw /media/sf_vagrant
+sudo chmod -R ugo+rw /vagrant
 ---> Reboot
 
 

@@ -64,11 +64,50 @@ _Screenshot \#1: FoxMask Box Launch_
 
 Before using FoxMask, a final configuration step is necessary. Make sure you have open and close FoxMask Box at least once.
 
-1. Shared folder
+1. **Shared folder**
 
 xxx
 
-2. Folder permissions
+![](screenshot-2.png)
+
+_Screenshot \#2: Open FoxMask Box settings_
+
+![](screenshot-3.png)
+
+_Screenshot \#3: Authorize shared folder between host and guest_
+
+
+2. **Folder permissions**
+
+xxx
+
+```bash
+sudo usermod -aG vboxsf vagrant
+```
+
+xxx
+
+```bash
+sudo chmod -R ugo+rw /media/sf_vagrant
+```
+
+xxx
+
+```bash
+sudo chmod -R ugo+rw /vagrant
+```
+
+Reboot the guest OS (Ubuntu) for the changes to take affect.
+
+3. **Symbolic link**
+
+xxx
+
+```bash
+sudo rm -r /vagrant
+sudo ln -s /media/sf_vagrant/ /
+sudo mv /sf_vagrant /vagrant
+```
 
 xxx
 
