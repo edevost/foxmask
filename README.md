@@ -12,7 +12,7 @@ This Python program is intended to be used within a virtual environment includin
 
 ### Installation
 
-Three open-source softwares need to be installed on your computer :
+Three open-source softwares need to be installed on your computer:
 
 - [VirtualBox v.5.1](https://www.virtualbox.org/), to manage virtual environments;
 - [Vagrant](https://www.vagrantup.com/), to unpack the Ubuntu 14.04 Box (including Linux Ubuntu 14.04, Python 2.7 and its required modules);
@@ -48,6 +48,12 @@ And download, unpack and install the FoxMask Box:
 cd foxmask
 vagrant up
 ```
+
+At the end of the installation, the virtual box is automatically launched. If not, open VirtualBox and run the FoxMask Box. You will see the Ubuntu 14.04 interface. In this virtual environment, your user name is **vagrant** and the associated password is **vagrant**.
+
+### Configuration
+
+
 
 Licensing
 =========
