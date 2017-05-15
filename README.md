@@ -93,11 +93,11 @@ sudo chmod -R ugo+rw /vagrant
 
 **Important:** restart the guest OS (Ubuntu) for the changes to take affect.
 
-Now, you can access to the content of the shared folder, i.e. the foxmask repository (`sf_vagrant`) in the guest OS.
+Now, you can access to the content of the shared folder, i.e. the foxmask repository (`sf_vagrant`) from the guest OS.
 
 3. **Symbolic link**
 
-The final step is to create a symbolic link between between `/media/sf_vagrant` and `/vagrant`. To be run FoxMask needs to be located on the `/vagrant` folder. But, this is not a shared folder. So we will create a symbolic link between the shared folder `/media/sf_vagrant` and `/vagrant`.
+To be run FoxMask needs to be located on the `/vagrant` folder. But, this is not a shared folder. So we will create a symbolic link between the shared folder `/media/sf_vagrant` and the folder `/vagrant`.
 
 ```bash
 sudo rm -r /vagrant
@@ -105,9 +105,9 @@ sudo ln -s /media/sf_vagrant/ /
 sudo mv /sf_vagrant /vagrant
 ```
 
-Now, all the content of the shared folder is also accessible from the `/vagrant` folder. If you add/modify/delete a file from `/vagrant`, changes will be passed on the shared folder `/media/sf_vagrant` (and the host OS).
+Now, all the content of the shared folder is also accessible from the `/vagrant` folder (like Dropbox when you use a single account from different platforms). If you add/modify/delete a file from `/vagrant`, changes will be passed on the shared folder `/media/sf_vagrant` (and the host OS).
 
-For instance, if you copy images on the shared folder since the host OS, these files will be accessible both via the `/media/sf_vagrant` and `/vagrant` folders.
+For instance, if you copy images on the shared folder in the host OS, these files will be accessible both via the `/media/sf_vagrant` and `/vagrant` folders of Ubuntu.
 
 ### Usage
 
