@@ -109,11 +109,24 @@ Now, all the content of the shared folder is also accessible from the `/vagrant`
 
 ### Usage
 
-This software is shipped with a sample images directory (**images/example/**) where you will find 50 images of Arctic fox. FoxMask consists of two Python scripts:
+FoxMask consists of two Python scripts:
 
-- `parameters.py`, ...
-- `foxmask.py`, ...
+- `parameters.py`, a simple file where user sets its own parameters (see below);
+- `foxmask.py`, the core program (user do not need to open it).
 
+User needs to set different parameters in the `parameters.py` file:
+
+- `imagesDir`, the location of the folder containing photos to analyze;
+- `outputDir`, the location of the folder to store results;
+- `ouname`, the name of the CSV file generated;
+- `maxgap`, the maximum time gap (in seconds) between two consecutive images (to build sequence);
+- `minsize`, the minimum size of detected objects;
+- `rmmasks`, the fate of generated masks (0: kept OR 1: deleted \[recommended\]);
+- `cpphotos`, if 1, images with detected objects are copied in a subfolder.
+
+**Note:** raw images are not modified.
+
+FoxMask program is shipped with a sample images directory (**images/example/**) where you will find 50 jpeg images of Arctic fox.
 
 
 ### Licensing
