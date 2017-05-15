@@ -1,5 +1,10 @@
 .vagrant/*
 *~
+old/*~
 .DS_store
 images/.DS_store
 images/examples/.DS_store
+misc/.DS_store
+misc/docs/.DS_store
+misc/installation/.DS_store
+old/.DS_store
