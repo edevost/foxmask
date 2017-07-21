@@ -1,3 +1,6 @@
+import re
+import numpy as np
+
 '''
 This file contains all parameters the user needs to set to run the Python program foxmask.py.
 '''
@@ -8,7 +11,8 @@ This file contains all parameters the user needs to set to run the Python progra
 # Can be one folder or a list of folders (but no embedded folders)
 # Do not forget the final '/'
 # Do not forget to enclose strings with '[' and ']'
-imagesDir = ["/media/sf_vagrant/reconyx/photos-fox/"]
+imagesDir = "/vagrant/images/"
+# imagesDir = ["/media/sf_vagrant/reconyx/photos-fox/"]
 # imagesDir = ["/media/sf_vagrant/reconyx-2/Fox024-2008-Cam1-test/"]
 # imagesDir = ["/media/sf_vagrant/reconyx-2/Fox024-2008-Cam1-test/",
 #              "/media/sf_vagrant/reconyx-2/Fox024-2008-Cam2-test/"]
@@ -50,7 +54,7 @@ imagesDir = ["/media/sf_vagrant/reconyx/photos-fox/"]
 # Do not forget the final '/'
 # A subfolder Results/ will be created
 
-outputDir = '/media/sf_vagrant/reconyx/'
+outputDir = '/vagrant/'
 
 
 
@@ -93,13 +97,17 @@ outputDir = '/media/sf_vagrant/reconyx/'
 # 'F325-2015-DB27-1',
 # 'F336-2013-DB28-1'
 # ]
-ouname = ["test"]
+outname = ["test"]
 
 # Maximum time gap (in seconds) between two consecutive images (to build sequence)
 
 maxgap = 5
 
 
+# Configuration of opening and erosion values
+
+kernelO1 = np.ones(( 1,  1), np.uint8)
+kernel   = np.ones((10, 10), np.uint8)
 
 # Deleting masks (0: no OR 1: yes [recommended])
 
@@ -118,7 +126,7 @@ cpphotos = 1
 # Can be one single value or a list of values (to perform sensitivity analyses)
 # Do not forget to enclose strings with '[' and ']'
 
-minsize = [150]
+minsize = [500]
 # minsize = [50, 100, 250, 500, 750, 1000]
 
 
@@ -195,3 +203,17 @@ minsize = [150]
 # 4835, 4840, 4845, 4850, 4855, 4860, 4865, 4870, 4875, 4880, 4885, 4890, 4895, 4900,
 # 4905, 4910, 4915, 4920, 4925, 4930, 4935, 4940, 4945, 4950, 4955, 4960, 4965, 4970,
 # 4975, 4980, 4985, 4990, 4995, 5000]
+
+
+'''
+The following variables should not be edited
+'''
+
+date_reg_exp = re.compile('\d{4}[-/]\d{1,2}[-/]\d{1,2}\ \d{1,2}:\d{1,2}:\d{1,2}')
+date_reg_expAM = re.compile('\d{4}[-/]\d{1,2}[-/]\d{1,2}\ \d{1,2}:\d{1,2}:\d{1,2}\ [AP][M]')
+date_reg_exp2 = re.compile('\d{4}[:/]\d{1,2}[:/]\d{1,2}\ \d{1,2}:\d{1,2}:\d{1,2}')
+
+# Location of the compiled cpp libraries.
+cppex     = './cpplibs/background_estimation_code/code/EstimateBackground'
+cppex2    = './cpplibs/foreground_detection_code/code/ForegroundSegmentation'
+paramsdir = './cpplibs/foreground_detection_code/code/'
