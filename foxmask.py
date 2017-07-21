@@ -34,7 +34,9 @@ from parameters import *
 
 time1 = time.time()
 
-class setup:
+
+
+class Setup:
     '''
     This class will do all the preliminary
     setup required to run the code and clean
@@ -90,7 +92,7 @@ class setup:
             if not os.path.exists(outputDir + newdir):
                 os.mkdir(os.path.join(outputDir, newdir))
 
-class getimagesinfos:
+class Getimagesinfos:
     '''
     This class will gather all images
     and informations about them, so they
@@ -190,7 +192,7 @@ class getimagesinfos:
         print 'Done Creating image sequences'
         return impg
 
-class imagesanalysis:
+class Imagesanalysis:
     '''
     This class constitue the core code of
     the image analysis. It uses external
@@ -342,7 +344,7 @@ class imagesanalysis:
         return resultrow
 
 
-class resultshandling:
+class Resultshandling:
     '''
     This class regroup functions that handles
     results of the image analysis.
@@ -362,10 +364,10 @@ class resultshandling:
 
 # Code execution
 # Instantiate classes
-runsetup = setup()
-rungetimagesinfo = getimagesinfos()
-runimagesanalysis = imagesanalysis()
-runresultshandling = resultshandling()
+runsetup = Setup()
+rungetimagesinfo = Getimagesinfos()
+runimagesanalysis = Imagesanalysis()
+runresultshandling = Resultshandling()
 # Get the folders list to be analysed
 folderslist = runsetup.getfolders()
 # Analyse folders one by one
