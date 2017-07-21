@@ -11,7 +11,6 @@ import sys
 sys.path.append("/usr/local/lib/python2.7/site-packages")
 import os
 import cv2
-import cv2.cv as cv
 from collections import defaultdict
 from numpy import genfromtxt
 import glob
@@ -20,12 +19,6 @@ import time
 from datetime import datetime, date
 import shutil
 import exiftool
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-from scipy.stats.stats import pearsonr
-from scipy.stats.stats import linregress
-import pylab
 import random
 import xlrd
 
