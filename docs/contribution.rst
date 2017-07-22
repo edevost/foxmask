@@ -28,7 +28,7 @@ You can visit the `documentation pages`_ directly on GitHub
 and edit the documentation page you wish modify. You can then
 submit your modification.
 
-.. _documentation pages: https://github.com/edevost/foxmask/docs
+.. _documentation pages: https://github.com/edevost/foxmask/tree/master/docs
 
 Contribute to the code
 ======================
