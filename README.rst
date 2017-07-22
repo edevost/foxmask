@@ -19,11 +19,10 @@ A tool to automatically analyze images taken by RECONYX cameras.
 Theses cameras are triggered by a motion detection system and
 FoxMask has been written to be able to isolate moving objects with
 very short image sequences (minimum of 5).
-It is written in Python and depends on C++ libraries.
+It is written in Python and depends on C++ libraries. Please read
+our `latest documentation`_ for more information about the project.
 
-* `Latest built documentation`_
-
-.. _latest built documentation: http://foxmask.readthedocs.io/en/documentation/
+.. _latest documentation: http://foxmask.readthedocs.io/en/documentation/
 
 Contact
 =======
