@@ -24,3 +24,21 @@ It is written in Python and depends on C++ libraries.
 * `Latest built documentation`_
 
 .. _latest built documentation: http://foxmask.readthedocs.io/en/documentation/
+
+Contact
+=======
+
+Feel free to contact us if you have any questions or comments:
+ericdevost@gmail.com
+
+
+References
+==========
+Devost É, Casajus N, Lai S & Berteaux D (9999) FOXMASK: a new automated tool
+for animal screening on camera trap images. Methods in Ecology and Evolution,
+submitted.
+
+V. Reddy, C. Sanderson, B.C. Lovell. Improved Foreground Detection via
+Block-based Classifier Cascade with Probabilistic Decision Integration.
+IEEE Transactions on Circuits and Systems for Video Technology,
+Vol. 23, No. 1, pp. 83-93, 2013.
