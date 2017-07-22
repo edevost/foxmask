@@ -72,8 +72,50 @@ Figure1
 Issues on MacOS
 ---------------
 
-.. todo::
-   This section has to be written
+The shared folder on Vagrant does not behave as expected on MacOS.
+We need to configure the vm to share the folder correctly with the
+host machine.
+
+Shared folder
+~~~~~~~~~~~~~
+
+The shared folder is used to make the cloned FoxMask repository
+accessible to the virtual machine. This is very useful, for example,
+to easily make images needed to be analyzed available to the
+virtual machine.
+
+To activate the shared folder, open VirtualBox manager
+and access the FoxMask Box settings:
+
+.. _figure2:
+
+Figure2
+  .. figure:: images/screenshot-2.png
+
+    Screenshot showing how to access the settings in VirtualBox manager.
+
+Then, make sure the settings look like in *Figure3*
+
+Figure3
+  .. figure:: images/screenshot-3.png
+
+     Screenshot showing the settings of the shared folder on
+     VirtualBox manager.
+
+To use FoxMask, it has to be located in the ``/vagrant`` folder
+on the virtual machine. However, this folder is not shared
+as expected, but instead reside in ``/media/sf_vagrant``, which
+is the actual shared folder. A symbolic link can be created
+on the Ubuntu box between the two:
+
+.. code-block:: console
+
+   sudo rm -rf /vagrant
+   sudo ln -s /media/sf_vagrant /vagrant
+   sudo chown vagrant /vagrant
+
+Restart your VM and should be ready to use FoxMask! Consult
+our :ref:`usage` page to get started.
 
 
 Standalone installation on Linux
@@ -153,7 +195,7 @@ Python module needed to read the images metadata.
 .. _pyexiftool: https://github.com/smarnach/pyexiftool
 
 
-Installing FoxMaks
+Installing FoxMask
 ------------------
 
 Once the dependencies have been installed, you are
