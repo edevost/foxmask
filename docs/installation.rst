@@ -125,7 +125,7 @@ should work on any distro. It has been tested on Ubunutu 16.04.
 We recommend this installation for users wishing to contribute
 to the FoxMask's code or to the ones interested in implementing
 FoxMask in their lab on bare metal hardware, or to build a
-FosMasks's cluster !
+FoxMasks's cluster !
 
 
 Requirements
