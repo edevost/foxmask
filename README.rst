@@ -2,6 +2,8 @@
 FoxMask
 =======
 
+Latest Documentation:
+
 .. image:: https://readthedocs.org/projects/foxmask/badge/?version=latest
   :target: http://foxmask.readthedocs.io/en/latest/?badge=latest
   :alt: Documentation Status
