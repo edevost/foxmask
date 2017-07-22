@@ -65,10 +65,6 @@ Figure1
      Screenshot example of the VirtualBox manager with the
      newly created foxmask virtual machine.
 
-
-.. _standalone installation on Linux:
-
-
 Issues on MacOS
 ---------------
 
@@ -117,6 +113,8 @@ on the Ubuntu box between the two:
 Restart your VM and should be ready to use FoxMask! Consult
 our :ref:`usage` page to get started.
 
+
+.. _standalone installation on Linux:
 
 Standalone installation on Linux
 ================================
