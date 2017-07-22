@@ -4,6 +4,7 @@
 Welcome to FoxMask's documentation
 ==================================
 
+
 * `Source code on GitHub`_
 
 .. _source code on github: https://github.com/edevost/foxmask
