@@ -2,20 +2,20 @@
 FoxMask
 =======
 
-Latest Documentation:
-
-.. image:: https://readthedocs.org/projects/foxmask/badge/?version=latest
-  :target: http://foxmask.readthedocs.io/en/latest/?badge=latest
-  :alt: Documentation Status
-
 This project is intended to be used by ecology
 researchers wishing to implement an automated workflow
 of image analysis. It is in early stage of development
 but is already giving promising results.
 
-What if FoxMask ?
-=================
+Latest Documentation on ReadTheDocs
+===================================
 
+.. image:: https://readthedocs.org/projects/foxmask/badge/?version=latest
+  :target: http://foxmask.readthedocs.io/en/latest/?badge=latest
+  :alt: Documentation Status
+
+What is FoxMask ?
+=================
 
 A tool to automatically analyze images taken by RECONYX cameras.
 Theses cameras are triggered by a motion detection system and
