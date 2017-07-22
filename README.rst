@@ -24,7 +24,7 @@ very short image sequences (minimum of 5).
 It is written in Python and depends on C++ libraries. Please read
 our `latest documentation`_ for more information about the project.
 
-.. _latest documentation: http://foxmask.readthedocs.io/en/documentation/
+.. _latest documentation: http://foxmask.readthedocs.io/en/latest/
 
 Contact
 =======
