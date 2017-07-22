@@ -1,0 +1,18 @@
+Standalone installation Arch
+============================
+
+yaourt python-pyexiftool
+yaourt armadillo
+yaourt opencv2
+
+g++ -L/usr/lib64 -L/usr/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
+
+Change the following line in :
+
+cpplibs/foreground_detection_code/code/CascadedBgs_meat.hpp
+
+Mat<u32> mask = fg_wts > tmp_mask1;
+for
+Mat<u32> mask = conv_to< Mat<u32> >::from(fg_wts > tmp_mask1); // workaround: recent versions of Armadillo use 64 bit integers in C++11 mode
+
+g++ -o ForegroundSegmentation main.cpp input_preprocessor.cpp -O2 -fopenmp -I/usr/include/opencv -I/usr/local/include/opencv -L/usr/lib64 -L/usr/local/lib -larmadillo -lopencv_core -lopencv_highgui -lopencv_imgproc
