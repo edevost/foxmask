@@ -9,3 +9,7 @@ misc/docs/.DS_store
 misc/installation/.DS_store
 old/.DS_store
 *.pyc
+build/*
+dist/*
+.eggs/*
+
