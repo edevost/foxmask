@@ -179,7 +179,7 @@ class Documentation(Command):
             '',
             "-b", target,
             "-d", cached_directory,
-            "-D", "latex_paper_size={!s}".format(self.paper),
+            #"-D", "latex_paper_size={!s}".format(self.paper),
             self.src_dir,
             build_dir
         ]

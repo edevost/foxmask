@@ -120,12 +120,39 @@ Standalone installation on Linux
 ================================
 
 This method will install FoxMask on your Linux Box.
-We provide here commands for Ubuntu, but this installation
-should work on any distro. It has been tested on Ubunutu 16.04.
-We recommend this installation for users wishing to contribute
-to the FoxMask's code or to the ones interested in implementing
-FoxMask in their lab on bare metal hardware, or to build a
-FoxMasks's cluster !
+We recommend this installation for Linux users or
+for those of you wishing to contribute to the FoxMask's code.
+We also recommend this installation if you wish to implement
+FoxMask in your lab on bare metal hardware, or if you want to build a
+FoxMask's cluster !
+
+For the installation, we provide an automated install script, which will
+take care of installing all the dependencies needed to run FoxMask
+as well as the software itself. It is made for **Ubuntu 16.04**.
+The file is located in ``install-scripts/install-ubuntu16.sh`` of
+the FoxMask repository. You can also download the file directly
+:download:`sh <../install-scripts/install-ubuntu16.sh>`. To execute
+the script, simply run the following command as a standard user. Note
+that you need to have ``sudo`` rights.
+
+
+.. code-block:: console
+
+   $ sh install-ubuntu16.sh
+
+.. note::
+   You can issue the install command from any directory, the
+   script will download all the needed softwares in your home
+   directory (e.g. /home/ericdevost/). Once the installation
+   is finished, you will find Foxmask under ``/vagrant``. The
+   reason for this tweak is that the cpp libraries used
+   by FoxMask are compiled to be used on a Vagrant virtual box, and
+   thus FoxMask need to be run from a directory called ``/vagrant``.
+
+
+The following is the documentation of the installation for **Ubuntu 16.04**.
+Users wishing to install FoxMask on another distribution can follow this
+as a general guideline.
 
 
 Requirements
@@ -138,7 +165,7 @@ Requirements
 Armadillo
 ~~~~~~~~~
 
-Before installing armadillo on Ubunutu, make sure you install
+Before installing Armadillo on Ubuntu, make sure you install
 the recommended dependencies
 
 .. code-block:: console
@@ -146,12 +173,13 @@ the recommended dependencies
    sudo apt-get install cmake, libblas-dev, liblapack-dev, libarpack-dev
 
 
-Get and unzip armadillo from their web site to compile the library.
-Make sure you are in the armadillo folder created when you unziped
-the archive.
+Get `Armadillo`_ from their web site and unzip the archive. Make sure you are
+in the armadillo folder created when you unziped the archive and issue the
+following commands to compile.
 
 .. code-block:: console
 
+   cmake .
    make
    sudo make install
 

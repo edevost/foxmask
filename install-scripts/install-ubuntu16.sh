@@ -3,6 +3,7 @@
 ####
 # Install script for Ubuntu 16.04
 # Intended to be run as user, in /home/user
+cd ~/
 sudo apt-get -y install cmake
 sudo apt-get -y install libblas-dev
 sudo apt-get -y install liblapack-dev
@@ -47,11 +48,11 @@ cd ..
 
 
 # FoxMask
-git clone https://github.com/edevost/foxmask.git
 
 sudo mkdir /vagrant
 sudo chown $USER /vagrant
-cp -R ~/foxmask/* /vagrant/
+git clone https://github.com/edevost/foxmask.git /vagrant
+
 cd /vagrant/cpplibs/background_estimation_code/code/
 
 g++ -L/usr/lib -L/usr/local/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
