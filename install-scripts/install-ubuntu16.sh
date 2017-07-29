@@ -12,6 +12,7 @@ sudo apt-get -y install libarpack2
 sudo apt-get -y install libarpack2-dev
 sudo apt-get -y install pkg-config
 sudo apt-get -y install python-pip
+sudo apt-get -y install unzip
 
 sudo apt-get -y install build-essential libgtk2.0-dev libjpeg-dev libtiff5-dev libjasper-dev libopenexr-dev python-dev python-numpy python-tk libtbb-dev libeigen3-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev libqt4-dev libqt4-opengl-dev sphinx-common libv4l-dev libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev default-jdk ant libvtk5-qt4-dev
 
@@ -37,22 +38,22 @@ cd armadillo-7.950.1/
 cmake .
 make
 sudo make install
-cd ..
-
+cd ~/
 # Pyexiftool
-cd ../../
 git clone git://github.com/smarnach/pyexiftool.git
 cd pyexiftool/
 sudo python2 setup.py install
-cd ..
 
+cd ~/
 
 # FoxMask
-
+# If we are not on a vagrant box, create the /vagrant dir
+if [ ! -d "/home/vagrant" ]; then
 sudo mkdir /vagrant
 sudo chown $USER /vagrant
-git clone https://github.com/edevost/foxmask.git /vagrant
+fi
 
+git clone https://github.com/edevost/foxmask.git /vagrant
 cd /vagrant/cpplibs/background_estimation_code/code/
 
 g++ -L/usr/lib -L/usr/local/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
@@ -85,7 +86,3 @@ else
     echo "Not on GCE"
 
 fi
-
-    
-     
-
