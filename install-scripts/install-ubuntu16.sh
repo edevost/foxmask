@@ -4,6 +4,7 @@
 # Install script for Ubuntu 16.04
 # Intended to be run as user, in /home/user
 cd ~/
+sudo apt-get update
 sudo apt-get -y install cmake
 sudo apt-get -y install libblas-dev
 sudo apt-get -y install liblapack-dev
@@ -13,11 +14,17 @@ sudo apt-get -y install libarpack2-dev
 sudo apt-get -y install pkg-config
 sudo apt-get -y install python-pip
 sudo apt-get -y install unzip
+sudo apt-get -y install mingetty
 
 sudo apt-get -y install build-essential libgtk2.0-dev libjpeg-dev libtiff5-dev libjasper-dev libopenexr-dev python-dev python-numpy python-tk libtbb-dev libeigen3-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev libqt4-dev libqt4-opengl-dev sphinx-common libv4l-dev libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev default-jdk ant libvtk5-qt4-dev
 
 
 sudo apt-get -y install libimage-exiftool-perl
+
+# If we are on vagrant, install xfce desktop
+if [ -d "/home/vagrant" ];then
+sudo apt-get install xfce4
+fi
 
 # OpenCV2
 
@@ -31,6 +38,7 @@ make -j8
 sudo make install -j8
 
 # Armadillo
+cd ~/
 wget http://sourceforge.net/projects/arma/files/armadillo-7.950.1.tar.xz
 tar -xf armadillo-7.950.1.tar.xz
 
