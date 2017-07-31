@@ -11,7 +11,7 @@ This file contains all parameters the user needs to set to run the Python progra
 # Can be one folder or a list of folders (but no embedded folders)
 # Do not forget the final '/'
 # Do not forget to enclose strings with '[' and ']'
-imagesDir = "/vagrant/images/"
+imagesDir = "./images/"
 # imagesDir = ["/media/sf_vagrant/reconyx/photos-fox/"]
 # imagesDir = ["/media/sf_vagrant/reconyx-2/Fox024-2008-Cam1-test/"]
 # imagesDir = ["/media/sf_vagrant/reconyx-2/Fox024-2008-Cam1-test/",
@@ -54,7 +54,7 @@ imagesDir = "/vagrant/images/"
 # Do not forget the final '/'
 # A subfolder Results/ will be created
 
-outputDir = '/vagrant/'
+outputDir = './'
 
 
 

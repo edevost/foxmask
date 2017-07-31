@@ -6,25 +6,77 @@ Installation
 
 We provide two methods for installing and using FoxMask:
 
-* :ref:`Installation through a virtual machine` (Any platform)
 * :ref:`Standalone installation on Linux`
+* :ref:`Installation through a virtual machine` (Any platform)
+
+
+.. _standalone installation on Linux:
+
+Standalone installation on Linux
+================================
+
+**This is the recommended method for production.**
+
+This method will install FoxMask on your Linux computer. We provide an
+automated install script, which will take care of installing all the
+dependencies needed to run FoxMask as well as the software itself. It is
+made for **Ubuntu 16.04**. The file is located in
+``install-scripts/install-ubuntu16.sh`` of the FoxMask repository.
+You can also download the file directly
+:download:`sh <../install-scripts/install-ubuntu16.sh>` an run it.
+To execute the script, simply run the following command as a standard user. Note
+that you will need to have ``sudo`` rights.
+
+
+.. code-block:: console
+
+   $ sh install-ubuntu16.sh
+
+.. note::
+   You can issue the install command from any directory, the
+   script will download all the needed softwares in your home
+   directory. Please do **not** run the script prefixed by sudo.
+
+One the installation if finished, you will have a ``foxmask`` directory
+in your home folder where you will find the software and a set of images
+to test the software. Congratulation, you are now ready to start using FoxMask
+on your Linux Box ! Consult our :ref:`usage` page to get
+started.
+
+This installation have been successfully tested on Ubuntu 16.04, on bare
+metal computers as well as on GCE (Google Cloud Engine) and VirtualBox 5.0.
 
 .. _installation through a virtual machine:
+
 
 Installation through a virtual machine
 ======================================
 
 We provide a complete virtual environment to run and
 use FoxMask. The main advantages of this installation
-is that there is no installation or configuration
-needed, apart of course the needed virtual environment.
-It can also be easily deployed on local virtual
-machines infrastructure or on cloud computing services
-as Amazon or Google cloud.
+is that you can rapidly get FoxMask running on any platform.
+. However, there are important drawbacks to consider:
 
-To run the virtual machine on your computer and to use
-FoxMask, you will need the following three open source
-softwares:
+* Poor performances compared to standalone installation
+* A bit heavy to manage (Vagrant + VirtualBox + share usb)
+
+Despite theses drawbacks, we consider that using
+our FoxMask box can be very useful for first time users
+wanting to test the software, or for development purposes.
+We do *not* recommend this installation for production.
+
+.. note::
+   Again, let me emphasize that this method is suitable to rapidly
+   get FoxMask up and running on another platform than Ubuntu. However, anyone
+   serious about implementing an automated image analysis pipeline with
+   FoxMask should consider installing it on bare metal hardware running
+   a Linux OS, or on a virtual infrastructure running *libvirt*. We provide
+   a fully automated installation script, successfully
+   tested on *Ubuntu 16.04*. Please see :ref:`standalone installation on linux`
+   to install FoxMask on you Linux machine.
+
+To run the FoxMask virtual machine on your Linux, Mac or Windows computer,
+you will need the following three open source softwares:
 
 * `VirtualBox`_
 * `Vagrant`_
@@ -36,11 +88,13 @@ softwares:
 
 Follow the installation procedure for your platform.
 Once theses softwares are installed, you are ready
-to use FoxMask by issuing the following command:
+to install FoxMask by issuing the following command:
+
 
 .. code-block:: console
 
    git clone https://github.com/edevost/foxmask.git
+
 
 This will fetch all needed components to run the virtual
 machine. Once the clone command is completed, you can
@@ -51,208 +105,41 @@ start the virtual machine by issuing the following commands:
    cd foxmask
    vagrant up
 
-At the end of the installation, the virtual box is automatically launched.
-If not, open VirtualBox and run the FoxMask Box by 1) selecting the box, and 2)
-clicking on the Start button *(Figure1)* . You will see the Ubuntu 14.04
-interface. In this virtual environment, your user name is vagrant and the
-associated password is vagrant.
-
-.. _figure1:
-
-Figure1
-  .. figure:: images/screenshot-1.png
-
-     Screenshot example of the VirtualBox manager with the
-     newly created foxmask virtual machine.
-
-Issues on MacOS
----------------
-
-The shared folder on Vagrant does not behave as expected on MacOS.
-We need to configure the vm to share the folder correctly with the
-host machine.
-
-Shared folder
-~~~~~~~~~~~~~
-
-The shared folder is used to make the cloned FoxMask repository
-accessible to the virtual machine. This is very useful, for example,
-to easily make images needed to be analyzed available to the
-virtual machine.
-
-To activate the shared folder, open VirtualBox manager
-and access the FoxMask Box settings:
-
-.. _figure2:
-
-Figure2
-  .. figure:: images/screenshot-2.png
-
-    Screenshot showing how to access the settings in VirtualBox manager.
-
-Then, make sure the settings look like in *Figure3*
-
-Figure3
-  .. figure:: images/screenshot-3.png
-
-     Screenshot showing the settings of the shared folder on
-     VirtualBox manager.
-
-To use FoxMask, it has to be located in the ``/vagrant`` folder
-on the virtual machine. However, this folder is not shared
-as expected, but instead reside in ``/media/sf_vagrant``, which
-is the actual shared folder. A symbolic link can be created
-on the Ubuntu box between the two:
-
-.. code-block:: console
-
-   sudo rm -rf /vagrant
-   sudo ln -s /media/sf_vagrant /vagrant
-   sudo chown vagrant /vagrant
-
-Restart your VM and should be ready to use FoxMask! Consult
-our :ref:`usage` page to get started.
-
-
-.. _standalone installation on Linux:
-
-Standalone installation on Linux
-================================
-
-This method will install FoxMask on your Linux Box.
-We recommend this installation for Linux users or
-for those of you wishing to contribute to the FoxMask's code.
-We also recommend this installation if you wish to implement
-FoxMask in your lab on bare metal hardware, or if you want to build a
-FoxMask's cluster !
-
-For the installation, we provide an automated install script, which will
-take care of installing all the dependencies needed to run FoxMask
-as well as the software itself. It is made for **Ubuntu 16.04**.
-The file is located in ``install-scripts/install-ubuntu16.sh`` of
-the FoxMask repository. You can also download the file directly
-:download:`sh <../install-scripts/install-ubuntu16.sh>`. To execute
-the script, simply run the following command as a standard user. Note
-that you need to have ``sudo`` rights.
-
-
-.. code-block:: console
-
-   $ sh install-ubuntu16.sh
-
-.. note::
-   You can issue the install command from any directory, the
-   script will download all the needed softwares in your home
-   directory (e.g. /home/ericdevost/). Once the installation
-   is finished, you will find Foxmask under ``/vagrant``. The
-   reason for this tweak is that the cpp libraries used
-   by FoxMask are compiled to be used on a Vagrant virtual box, and
-   thus FoxMask need to be run from a directory called ``/vagrant``.
-
-
-The following is the documentation of the installation for **Ubuntu 16.04**.
-Users wishing to install FoxMask on another distribution can follow this
-as a general guideline.
-
-
-Requirements
-------------
-
-* `Armadillo`_
-* `OpenCV2`_
-* `Pyexiftool`_
-
-Armadillo
-~~~~~~~~~
-
-Before installing Armadillo on Ubuntu, make sure you install
-the recommended dependencies
-
-.. code-block:: console
-
-   sudo apt-get install cmake, libblas-dev, liblapack-dev, libarpack-dev
-
-
-Get `Armadillo`_ from their web site and unzip the archive. Make sure you are
-in the armadillo folder created when you unziped the archive and issue the
-following commands to compile.
-
-.. code-block:: console
-
-   cmake .
-   make
-   sudo make install
-
-
-OpenCV2
-~~~~~~~
-
-The FoxMask code has not yet been ported to use the latest OpenCV libraries, so
-we need to `install OpenCV2`_.
-
-.. code-block:: console
-
-   sudo apt-get install libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
-   wget http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.9/opencv-2.4.9.zip
-   unzip opencv-2.4.9.zip
-   cd opencv-2.4.9
-   mkdir build
-   cd build
-   cmake -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D WITH_VTK=ON ..
-
-
-.. _install opencv2: http://www.samontab.com/web/2014/06/installing-opencv-2-4-9-in-ubuntu-14-04-lts/
-
-Pyexiftool
-~~~~~~~~~~
-
-Python module needed to read the images metadata.
-
-.. code-block:: console
-
-   git clone git://github.com/smarnach/pyexiftool.git
-   cd pyexiftool
-   sudo python2 setup.py install
-
-
-
-.. _armadillo: http://arma.sourceforge.net/download.html
-.. _opencv2: http://docs.opencv.org/2.4.13.2/
-.. _pyexiftool: https://github.com/smarnach/pyexiftool
-
-
-Installing FoxMask
-------------------
-
-Once the dependencies have been installed, you are
-ready to install FoxMask on your computer. First
-clone the FoxMaks repository:
-
-.. code-block:: console
-
-   git clone https://github.com/edevost/foxmask.git
-
-
-Once the repo has been cloned, you need to compile
-the two cpp libraries used to detect the background
-and perform a foreground segmentation on images.Theses
-libraries need to be compiled and liked to your version
-of Armadillo.
-
-.. code-block:: console
-
-   cd ~/foxmask/cpplibs/background_estimation_code/code/
-   g++ -L/usr/lib64 -L/usr/lib -I/usr/include -I/usr/local/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
-   cd ~/foxmask/cpplibs/foreground_detection_code/code/
-   g++ -o ForegroundSegmentation main.cpp input_preprocessor.cpp -O2 -fopenmp -I/usr/include/opencv -I/usr/local/include/opencv -L/usr/lib64 -L/usr/local/lib -larmadillo -lopencv_core -lopencv_highgui -lopencv_imgproc
-
-Finaly, install the needed python libraries needed by FoxMask:
-
-.. code-block:: console
-
-   cd ~/foxmask
-   python2 -m pip install -r requirements.txt --user
-
-Congratulation, you are now ready to start using FoxMask
-on your Linux Box ! Consult our :ref:`usage` page to get
-started.
+This will boot the virtual machine. You can also manage you
+virtual machine through VirtualBox software, and start or
+stop your machine from there. The start process will bring you to
+the Ubuntu desktop. The default user and password on this
+virtual environment is vagrant vagrant. Once the machine is ready, you can
+proceed to our :ref:`usage` section to launch FoxMask on the provided
+set of images.
+
+Testing on your own set of images
+---------------------------------
+
+To test FoxMask on your own set of images, you will have to make your
+images available to the virtual machine. To do so, we recommend saving
+your image set on an usb drive, and make the drive available to VirtualBox.
+There are many good tutorials on the web explaining the process:
+
+* http://www.dedoimedo.com/computers/virtualbox-usb.html
+* https://www.groovypost.com/howto/mount-usb-drive-virtualbox/
+* https://techtooltip.wordpress.com/2008/09/22/how-to-use-host-usb-device-from-guest-in-virtual-box/
+
+Making this work will demand a bit of work and reading, but nothing out of
+reach of any computer users with minimal computer knowledge. The main steps
+to get your FoxMask virtual machine to have access to an usb drive plugged
+on your host computer are the following:
+
+* Shutdown your FoxMask virtual machine if it is running
+* Plug your usb drive on your computer (host)
+* Install `Virtual Box 5.0`_ extension pack
+* Activate usb controller on VirtualBox
+* Add your drive
+
+Once your drive is added, boot your FoxMask virtual machine
+and check if there is a link to your drive on the desktop.
+If everything went well, you will have direct access to your
+usb drive on your virtual machine ! You can then proceed to our
+:ref:`usage` section to start using FoxMask on your set of images.
+
+.. _virtual box 5.0: https://www.virtualbox.org/wiki/Download_Old_Builds_5_0
