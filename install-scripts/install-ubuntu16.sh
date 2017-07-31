@@ -55,23 +55,17 @@ sudo python2 setup.py install
 cd ~/
 
 # FoxMask
-# If we are not on a vagrant box, create the /vagrant dir
-if [ ! -d "/home/vagrant" ]; then
-sudo mkdir /vagrant
-sudo chown $USER /vagrant
-fi
 
-git clone https://github.com/edevost/foxmask.git /vagrant
-cd /vagrant/cpplibs/background_estimation_code/code/
+git clone https://github.com/edevost/foxmask.git
+cd ~/foxmask/cpplibs/background_estimation_code/code/
 
 g++ -L/usr/lib -L/usr/local/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
 
-
-cd /vagrant/cpplibs/foreground_detection_code/code/
+cd ~/foxmask/cpplibs/foreground_detection_code/code/
 
 g++ -o ForegroundSegmentation main.cpp input_preprocessor.cpp -O2 -fopenmp -I/usr/include/opencv -L/usr/lib64  -L/usr/lib -L/usr/local/lib -larmadillo -lopencv_core -lopencv_highgui -lopencv_imgproc
 
-cd /vagrant/
+cd ~/foxmask
 sudo python2 -m pip install -r requirements.txt
 
 # If on google cloud, make the machine available

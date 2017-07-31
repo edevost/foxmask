@@ -17,14 +17,21 @@ Installation through a virtual machine
 We provide a complete virtual environment to run and
 use FoxMask. The main advantages of this installation
 is that there is no installation or configuration
-needed, apart of course the needed virtual environment.
-It can also be easily deployed on local virtual
-machines infrastructure or on cloud computing services
-as Amazon or Google cloud.
+needed, apart of course the needed software for
+virtual environment (Virtual Box and Vagrant).
 
-To run the virtual machine on your computer and to use
-FoxMask, you will need the following three open source
-softwares:
+.. note::
+   This method is suitable to rapidly get FoxMask up and running
+   and to test it on a set of your own images. However, anyone
+   serious about implementing an automated image analysis pipeline with
+   FoxMask should consider installing it on bare metal hardware running
+   a Linux OS, or on a virtual infrastructure running *libvirt*. We provide
+   a fully automated installation script, successfully
+   tested on *Ubuntu 16.04*. Please see :ref:`standalone installation on linux`
+   to install FoxMask on you Linux machine.
+
+To run the virtual machine on your Mac or Windows computer and to use
+FoxMask, you will need the following three open source softwares:
 
 * `VirtualBox`_
 * `Vagrant`_
@@ -119,21 +126,15 @@ our :ref:`usage` page to get started.
 Standalone installation on Linux
 ================================
 
-This method will install FoxMask on your Linux Box.
-We recommend this installation for Linux users or
-for those of you wishing to contribute to the FoxMask's code.
-We also recommend this installation if you wish to implement
-FoxMask in your lab on bare metal hardware, or if you want to build a
-FoxMask's cluster !
-
-For the installation, we provide an automated install script, which will
-take care of installing all the dependencies needed to run FoxMask
-as well as the software itself. It is made for **Ubuntu 16.04**.
-The file is located in ``install-scripts/install-ubuntu16.sh`` of
-the FoxMask repository. You can also download the file directly
-:download:`sh <../install-scripts/install-ubuntu16.sh>`. To execute
-the script, simply run the following command as a standard user. Note
-that you need to have ``sudo`` rights.
+This method will install FoxMask on your Linux computer. We provide an
+automated install script, which will take care of installing all the
+dependencies needed to run FoxMask as well as the software itself. It is
+made for **Ubuntu 16.04**. The file is located in
+``install-scripts/install-ubuntu16.sh`` of the FoxMask repository.
+You can also download the file directly
+:download:`sh <../install-scripts/install-ubuntu16.sh>` an run it.
+To execute the script, simply run the following command as a standard user. Note
+that you will need to have ``sudo`` rights.
 
 
 .. code-block:: console
@@ -143,27 +144,38 @@ that you need to have ``sudo`` rights.
 .. note::
    You can issue the install command from any directory, the
    script will download all the needed softwares in your home
-   directory (e.g. /home/ericdevost/). Once the installation
-   is finished, you will find Foxmask under ``/vagrant``. The
-   reason for this tweak is that the cpp libraries used
-   by FoxMask are compiled to be used on a Vagrant virtual box, and
-   thus FoxMask need to be run from a directory called ``/vagrant``.
+   directory (e.g. /home/ericdevost/). Do **not** run the script
+   with sudo.
+
+One the installation if finished, you will have a ``foxmask`` directory
+in your home folder where you will find the software and a set of images
+to test the software. Please proceed to the :ref:`usage` section to learn
+how to use foxmask
+
+Detailed installation procedure for Linux
+-----------------------------------------
+
+The following is the general documentation of the installation
+for **Ubuntu 16.04**. It is basically the same broad steps that figures in
+the install script. Users wishing to install FoxMask on another distribution
+can follow this as a general guideline.
+
+.. note::
+  Users installing FoxMask with the provided install script
+  do **not** need to follow this procedure.
 
 
-The following is the documentation of the installation for **Ubuntu 16.04**.
-Users wishing to install FoxMask on another distribution can follow this
-as a general guideline.
 
 
 Requirements
-------------
+~~~~~~~~~~~~
 
 * `Armadillo`_
 * `OpenCV2`_
 * `Pyexiftool`_
 
 Armadillo
-~~~~~~~~~
++++++++++
 
 Before installing Armadillo on Ubuntu, make sure you install
 the recommended dependencies
@@ -185,7 +197,7 @@ following commands to compile.
 
 
 OpenCV2
-~~~~~~~
++++++++
 
 The FoxMask code has not yet been ported to use the latest OpenCV libraries, so
 we need to `install OpenCV2`_.
@@ -204,7 +216,7 @@ we need to `install OpenCV2`_.
 .. _install opencv2: http://www.samontab.com/web/2014/06/installing-opencv-2-4-9-in-ubuntu-14-04-lts/
 
 Pyexiftool
-~~~~~~~~~~
+++++++++++
 
 Python module needed to read the images metadata.
 
