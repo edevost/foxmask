@@ -37,7 +37,7 @@ that you will need to have ``sudo`` rights.
    script will download all the needed softwares in your home
    directory. Please do **not** run the script prefixed by sudo.
 
-One the installation if finished, you will have a ``foxmask`` directory
+Once the installation if finished, you will have a ``foxmask`` directory
 in your home folder where you will find the software and a set of images
 to test the software. Congratulation, you are now ready to start using FoxMask
 on your Linux Box ! Consult our :ref:`usage` page to get
@@ -52,10 +52,12 @@ metal computers as well as on GCE (Google Cloud Engine) and VirtualBox 5.0.
 Installation through a virtual machine
 ======================================
 
+**We do not recommend this installation for production.**
+
 We provide a complete virtual environment to run and
 use FoxMask. The main advantages of this installation
-is that you can rapidly get FoxMask running on any platform.
-. However, there are important drawbacks to consider:
+is that you can rapidly get FoxMask running on any platform. However, 
+there are important drawbacks to consider:
 
 * Poor performances compared to standalone installation
 * A bit heavy to manage (Vagrant + VirtualBox + share usb)
@@ -63,7 +65,7 @@ is that you can rapidly get FoxMask running on any platform.
 Despite theses drawbacks, we consider that using
 our FoxMask box can be very useful for first time users
 wanting to test the software, or for development purposes.
-We do *not* recommend this installation for production.
+
 
 .. note::
    Again, let me emphasize that this method is suitable to rapidly
