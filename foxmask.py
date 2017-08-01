@@ -21,7 +21,7 @@ import shutil
 import exiftool
 import random
 import xlrd
-
+#import parameters
 from fnmatch import filter, fnmatch
 from parameters import *
 
@@ -192,7 +192,7 @@ class Imagesanalysis:
     cpp libraries coded by... citation...
 
     '''
-    def bgfgestimation(self, impg, sortedimglist, folder):
+    def bgfgestimation(self, impg, sortedimglist, folder, temp1):
         '''
         Estimate background model and perform
         foreground segmentation, which is define
@@ -355,40 +355,44 @@ class Resultshandling:
             w = csv.writer(f)
             w.writerows(resultlist)
 
-# Code execution
-# Instantiate classes
-runsetup = Setup()
-rungetimagesinfo = Getimagesinfos()
-runimagesanalysis = Imagesanalysis()
-runresultshandling = Resultshandling()
-# Get the folders list to be analysed
-folderslist = runsetup.getfolders()
-# Analyse folders one by one
-for folder in folderslist:
-    '''
-    Iterate through folders and execute the
-    code on each of them
-    '''
-    imglist = rungetimagesinfo.getimageslist(folder)
-    listtags = rungetimagesinfo.getimagesmeta(imglist)
-    sortedimglist, sortedlisttags = rungetimagesinfo.sortimages(imglist, listtags)
-    impg = rungetimagesinfo.getimpg(sortedlisttags)
-    temp1 = runsetup.maketempdir(folder)
-    runsetup.makeresultsfolder(folder)
-    runimagesanalysis.bgfgestimation(impg, sortedimglist, folder)
-    maskslist = runimagesanalysis.getmaskslist(folder)
-    # Analysing images
-    resultlist = []
-    for i in range(len(maskslist)):
-        currentMask, contoursE, currentMask2, workFrame, workFramecp = runimagesanalysis.loadframes(
-            sortedimglist, maskslist, i )
-        resultrow = runimagesanalysis.generateresults(currentMask,
-                                      contoursE,
-                                      currentMask2,
-                                      workFrame,
-                                      workFramecp)
-        resultlist.append(resultrow)
-    # Write results for analysed folder
-    runresultshandling.writetable(folder, resultlist)
-    # Cleanup Maksresults
-    runsetup.delmaskresults(folder)
+def main():
+    # Code execution
+    # Instantiate classes
+    runsetup = Setup()
+    rungetimagesinfo = Getimagesinfos()
+    runimagesanalysis = Imagesanalysis()
+    runresultshandling = Resultshandling()
+    # Get the folders list to be analysed
+    folderslist = runsetup.getfolders()
+    # Analyse folders one by one
+    for folder in folderslist:
+        '''
+        Iterate through folders and execute the
+        code on each of them
+        '''
+        imglist = rungetimagesinfo.getimageslist(folder)
+        listtags = rungetimagesinfo.getimagesmeta(imglist)
+        sortedimglist, sortedlisttags = rungetimagesinfo.sortimages(imglist, listtags)
+        impg = rungetimagesinfo.getimpg(sortedlisttags)
+        temp1 = runsetup.maketempdir(folder)
+        runsetup.makeresultsfolder(folder)
+        runimagesanalysis.bgfgestimation(impg, sortedimglist, folder, temp1)
+        maskslist = runimagesanalysis.getmaskslist(folder)
+        # Analysing images
+        resultlist = []
+        for i in range(len(maskslist)):
+            currentMask, contoursE, currentMask2, workFrame, workFramecp = runimagesanalysis.loadframes(
+                sortedimglist, maskslist, i )
+            resultrow = runimagesanalysis.generateresults(currentMask,
+                                          contoursE,
+                                          currentMask2,
+                                          workFrame,
+                                          workFramecp)
+            resultlist.append(resultrow)
+        # Write results for analysed folder
+        runresultshandling.writetable(folder, resultlist)
+        # Cleanup Maksresults
+        runsetup.delmaskresults(folder)
+
+if __name__ == "__main__":
+    main()
