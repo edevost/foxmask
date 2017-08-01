@@ -1,9 +1,19 @@
+# -*- coding: utf-8 -*-
+
 '''
 This script will evaluate the background based on images
-located, by default, in the /vagrant/foxmask/Images directory.
-All images are resized (for performance issues) and the background
-is evaluated. The resulting images are saved in a temporary
-directory located within the /vagrant/foxmask/Images directory.
+located, by default, in the ``Images`` directory of the
+FoxMask repository, and perform a foreground segmentation
+to identify moving objects.
+
+Example:
+    To run this module, simply invoke it from the command
+    line.
+
+    $ python2 foxmask.py
+
+The resulting images are saved in a temporary
+directory located within the Images directory.
 '''
 
 import csv
@@ -37,22 +47,35 @@ class Setup:
     '''
     def getfolders(self):
         '''
-        Get a list of all folders existing
-        in the imagesDir folder. These images
-        will be the ones analyzed by FoxMask,
-        folder by folder.
+        This function will take as input the
+        ``imagesDir`` variable specified in
+        ``parameters.py`` and return a list
+        of all folders present in it. This list
+        will then feed the software with all the folders
+        containing images to be analyzed. Each folders are 
+        considered as a single analyzed entity. This will be 
+        reflected in the writing of the results, which will 
+        written as one results per folders.
+
+        Returns:
+          list. A list of all folders in ``imageDir``.
+
         '''
 
         folderslist = os.walk(imagesDir).next()[1]
         print "Anlysing images in :", folderslist
-        # Append images dir to the list
         folderslist = [imagesDir + s for s in folderslist]
         return folderslist
 
     def maketempdir(self, folder):
         '''
         Creation of a temporary directory in which
-        ... will be written. This should not be here.
+        all analyzed images will be written. This directory
+        will be created in all folders being analyzed.
+
+        Returns:
+           string. The location of the actual folder being
+           analyzed concatenated with ``temp1``.
         '''
 
         if not os.path.exists(folder + '/temp1'):

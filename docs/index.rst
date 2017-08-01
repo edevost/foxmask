@@ -25,3 +25,4 @@ Getting Started
    installation
    usage
    contribution
+   code
