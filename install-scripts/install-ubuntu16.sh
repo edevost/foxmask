@@ -17,7 +17,7 @@ sudo apt-get -y install unzip
 sudo apt-get -y install mingetty
 
 sudo apt-get -y install build-essential libgtk2.0-dev libjpeg-dev libtiff5-dev libjasper-dev libopenexr-dev python-dev python-numpy python-tk libtbb-dev libeigen3-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev libqt4-dev libqt4-opengl-dev sphinx-common libv4l-dev libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev default-jdk ant libvtk5-qt4-dev
-
+sudo apt-get -qq install libopencv-dev build-essential checkinstall cmake pkg-config yasm libjpeg-dev libjasper-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libxine2 libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev python-dev python-numpy libtbb-dev libqt4-dev libgtk2.0-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils
 
 sudo apt-get -y install libimage-exiftool-perl
 
@@ -25,6 +25,24 @@ sudo apt-get -y install libimage-exiftool-perl
 if [ -d "/home/vagrant" ];then
 sudo apt-get install xfce4
 fi
+
+# Armadillo
+cd ~/
+wget http://sourceforge.net/projects/arma/files/armadillo-7.950.1.tar.xz
+tar -xf armadillo-7.950.1.tar.xz
+
+cd armadillo-7.950.1/
+cmake .
+make
+sudo make install
+cd ~/
+
+# Pyexiftool
+git clone git://github.com/smarnach/pyexiftool.git
+cd pyexiftool/
+sudo python2 setup.py install
+
+cd ~/
 
 # OpenCV2
 
@@ -37,23 +55,7 @@ cmake -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_
 make -j8
 sudo make install -j8
 
-# Armadillo
 cd ~/
-wget http://sourceforge.net/projects/arma/files/armadillo-7.950.1.tar.xz
-tar -xf armadillo-7.950.1.tar.xz
-
-cd armadillo-7.950.1/
-cmake .
-make
-sudo make install
-cd ~/
-# Pyexiftool
-git clone git://github.com/smarnach/pyexiftool.git
-cd pyexiftool/
-sudo python2 setup.py install
-
-cd ~/
-
 # FoxMask
 
 git clone https://github.com/edevost/foxmask.git
@@ -79,7 +81,7 @@ sudo dpkg -i turbovnc_2.1_amd64.deb
 sudo dpkg -i virtualgl_2.5.2_amd64.deb
 
 mkdir /home/$USER/.vnc
-cat << EOF > /home/$USER/.vnc/xstartup
+cat << EOF > /home/$USER/.vnc/xstartup.turbovnc
 #!/bin/sh
 xrdb $HOME/.Xresources
 startxfce4 &
