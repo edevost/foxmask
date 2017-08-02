@@ -21,6 +21,7 @@ import shlex
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('../'))
 
+import foxmask
 from setup import get_distribution_info
 
 project_metadata = get_distribution_info()
