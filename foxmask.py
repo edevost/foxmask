@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
 '''
-This script will evaluate the background based on images
+The ``foxmask.py`` module will evaluate the background based on images
 located, by default, in the ``Images`` directory of the
 FoxMask repository, and perform a foreground segmentation
-to identify moving objects.
+to identify moving objects. The main routine of the code will
+iterate through every folders present in the ``Images`` directory, and
+analyze found images. The ``Images`` directory is set by a variable define
+in ``parameters.py``: **imagesDir**.
 
 Example:
     To run this module, simply invoke it from the command
@@ -12,8 +15,13 @@ Example:
 
     $ python2 foxmask.py
 
-The resulting images are saved in a temporary
-directory located within the Images directory.
+The ultimate output of this module is a ``Results``
+directory, under which resulting masks are copied, as
+well as images containing moving objects (as the result
+of the analysis). Tables are also written, one table for
+each directory analyzed. Each table contains the name
+of the image, the result (0 or 1) of detection and parameters
+used during the analysis.
 '''
 
 import csv
@@ -41,24 +49,20 @@ time1 = time.time()
 
 class Setup:
     '''
-    This class will do all the preliminary
-    setup required to run the code and clean
-    temporary files.
+
     '''
     def getfolders(self):
         '''
         This function will take as input the
-        ``imagesDir`` variable specified in
+        **imagesDir** variable specified in
         ``parameters.py`` and return a list
         of all folders present in it. This list
         will then feed the software with all the folders
         containing images to be analyzed. Each folders are 
-        considered as a single analyzed entity. This will be 
-        reflected in the writing of the results, which will 
-        written as one results per folders.
+        considered as a single analyzed entity.
 
         Returns:
-          list. A list of all folders in ``imageDir``.
+          list. A list of all folders in **imagesDir**.
 
         '''
 
@@ -71,11 +75,19 @@ class Setup:
         '''
         Creation of a temporary directory in which
         all analyzed images will be written. This directory
-        will be created in all folders being analyzed.
+        will be created in all folders being analyzed and removed
+        after each run.
+
+        .. note::
+           For performances issue, the images analyzed are
+           being resized, so this function exist to create
+           a place where to store the resized images. Theses
+           resized images, placed in a temporary folder, will
+           be the one actually analyzed by the software.
 
         Returns:
            string. The location of the actual folder being
-           analyzed concatenated with ``temp1``.
+           analyzed concatenated with **temp1**.
         '''
 
         if not os.path.exists(folder + '/temp1'):
@@ -85,10 +97,17 @@ class Setup:
 
     def delmaskresults(self, folder):
         '''
-        Remove MaskResults directory if
-        the flag is set to 0 in parameters.
+        Remove the MasksResults directory. 
+        The ``MasksResults`` directory is
+        created by the cpp command (calling 
+        ForegroundSegmentation), on each run, 
+        and resides in the folder being analyzed.
+        If the variable **rmmasks** (in ``parameters.py``)
+        is set to 1, the directory will be removed 
+        after each run. If not, masks will be kept in
+        place.
         '''
-        if rmmasks == 0:
+        if rmmasks == 1:
             if os.path.exists(folder + '/MasksResults'):
                 shutil.rmtree(folder + '/MasksResults')
             else:
@@ -108,19 +127,26 @@ class Setup:
             if not os.path.exists(outputDir + newdir):
                 os.mkdir(os.path.join(outputDir, newdir))
 
+
 class Getimagesinfos:
     '''
-    This class will gather all images
-    and informations about them, so they
-    can afterwards be analysed.
+
     '''
     def getimageslist(self, folder):
         '''
-        Get a list of all images under `folder`.
-
+        Generate a list of all images under `folder`, which
+        is the actual folder being analyzed. This `folder` is
+        the actual result of the iteration over the `folderslist` list.
+        As written, the code will only gather .jpg images.
+        
         .. note::
-            This should be rewritten using ignore case
-            or something else.
+            This function should be rewritten using ignore 
+            case, and should be able to gather other images
+            format.
+
+        Returns:
+           list. The list of images under the folder
+           being analyzed.
 
         '''
         imglist = []
@@ -132,12 +158,20 @@ class Getimagesinfos:
 
     def getimagesmeta(self, imglist):
         '''
-        Get metadata (creation time) of every
-        image and store it into a list.
+        Get metadata ``DateTimeOriginal`` from every
+        image in **imglist** and store them into a list.
+        It's crucial to get the accurate time of creation as
+        it is used by :meth:`getimpg` to group images that
+        were taken few seconds apart.
 
         Format returned:
 
         >>> datetime.datetime(2014, 8, 6, 16, 5, 55)
+
+        Returns:
+           list. List of datetime objects representing the exact
+           time the image were taken.
+           
         '''
         listtags = []
 
