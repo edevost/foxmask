@@ -16,7 +16,7 @@ kept. This could be useful, for example, for visual
 evaluation of the analysis.
 
 
-.. autoclass:: Setup
+.. autoclass:: foxmask.Setup
    :members: getfolders, maketempdir, delmaskresults
 
 Images to analyze and metadata
