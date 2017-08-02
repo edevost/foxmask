@@ -327,7 +327,7 @@ class Imagesanalysis:
         print 'Loading and sorting masks'
         return maskslist
 
-    def generateresults(self, currentMask, contoursE,
+    def generateresults(self, i, maskslist, currentMask, contoursE,
                     currentMask2, workFrame, workFramecp):
         '''
         Load mask  and find contours and size of objects in masks.
@@ -406,7 +406,7 @@ def main():
         for i in range(len(maskslist)):
             currentMask, contoursE, currentMask2, workFrame, workFramecp = runimagesanalysis.loadframes(
                 sortedimglist, maskslist, i )
-            resultrow = runimagesanalysis.generateresults(currentMask,
+            resultrow = runimagesanalysis.generateresults(i, maskslist, currentMask,
                                           contoursE,
                                           currentMask2,
                                           workFrame,
