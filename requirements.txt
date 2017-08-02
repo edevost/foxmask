@@ -11,3 +11,4 @@ sphinx_rtd_theme
 pathlib
 xlrd
 opencv-python
+-e git://github.com/smarnach/pyexiftool.git#egg=pyexiftool
