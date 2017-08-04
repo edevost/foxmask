@@ -26,7 +26,7 @@ used during the analysis.
 
 import csv
 import sys
-sys.path.append("/usr/local/lib/python2.7/site-packages")
+#sys.path.append("/usr/local/lib/python2.7/site-packages")
 import os
 import cv2
 from collections import defaultdict
