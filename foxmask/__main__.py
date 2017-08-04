@@ -12,9 +12,9 @@ import shutil
 def main(foldersdir, resultsdir):
     """Exectution of the foxmask module.
     """
- #   if os.path.exists(resultsdir + '/FoxMaskResults'):
- #       click.confirm(resultsdir + '/FoxMaskResults directory exist Do you want to '
- #                     'continue and overwrite the results', abort=True)
+    if os.path.exists(resultsdir + '/FoxMaskResults'):
+        click.confirm(resultsdir + '/FoxMaskResults directory exist Do you want to '
+                      'continue and overwrite the results', abort=True)
     foxmask.makeresultsfolder(resultsdir)
     folderslist = foxmask.getfolders(foldersdir)
     classdict = {}

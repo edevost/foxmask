@@ -52,7 +52,7 @@ def getfolders(foldersdir):
     if not os.path.exists(foldersdir):
         print(foldersdir,
               "directory does not exist !")
-        sys.exit()
+#        sys.exit()
 
     folderslist = os.walk(foldersdir).next()[1]
     folderslist = [foldersdir + '/' + s for s in folderslist]
