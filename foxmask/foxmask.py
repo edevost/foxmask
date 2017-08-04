@@ -282,7 +282,7 @@ class Imagesanalysis(Getimagesinfos):
             currentMaskOp = cv2.morphologyEx(currentMaskOp1,
                                              cv2.MORPH_CLOSE, parameters.kernel)
             currentMask = cv2.convertScaleAbs(currentMaskOp)
-            contoursE, hye = cv2.findContours(currentMask.copy(),
+            im2, contoursE, hye = cv2.findContours(currentMask.copy(),
                                               cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
             areas = [cv2.contourArea(c) for c in contoursE]
             for k in range(len(minsize)):
