@@ -1,19 +1,24 @@
 # -*- coding: utf-8 -*-
 
-'''
-The ``foxmask.py`` module will evaluate the background based on images
-located, by default, in the ``Images`` directory of the
-FoxMask repository, and perform a foreground segmentation
-to identify moving objects. The main routine of the code will
-iterate through every folders present in the ``Images`` directory, and
-analyze found images. The ``Images`` directory is set by a variable define
-in ``parameters.py``: **imagesDir**.
+"""Evaluate if an image contains moving objects (animals).
 
-Example:
-    To run this module, simply invoke it from the command
-    line.
+The main routine of the code will iterate through every folders present 
+in the **images** directory and analyze found images, looking
+for moving objects. To run ``FoxMask``, simply invoke it from the command
+line, from the root of the FoxMask repository.
 
-    $ python2 foxmask.py
+.. code-block:: console
+    
+  $ foxmask --foldersdir images --resultsdir .
+
+Args:
+    foldersdir (str): The directory containing folders (one or many) with images 
+    to analyze. The default value is set to **images**.
+
+    resultsdir (str): The location where to create the **FoxMaskResults**
+    directory. The default value is set to the actual 
+    directory where the ``foxmask`` command is launched.
+
 
 The ultimate output of this module is a ``Results``
 directory, under which resulting masks are copied, as
@@ -22,7 +27,8 @@ of the analysis). Tables are also written, one table for
 each directory analyzed. Each table contains the name
 of the image, the result (0 or 1) of detection and parameters
 used during the analysis.
-'''
+
+"""
 
 import csv
 import sys
@@ -40,6 +46,17 @@ time1 = time.time()
 
 def getfolders(foldersdir):
     """Get the list of all folders in **foldersdir**
+
+    FoxMask needs a list of folders containing images to analyze.
+    Each folder must strictly contain a set of images. No subfolders
+    are allowed. Code will gracefully exit if the **foldersdir** argument
+    does not exist.
+
+    Args:
+        foldersdir (str): Top level folder containing all folders to analyze.
+    
+    Returns:
+        list. A list of folders.
     """
     if not os.path.exists(foldersdir):
         print(foldersdir,
@@ -55,6 +72,12 @@ def getfolders(foldersdir):
 
 def makeresultsfolder(resultsdir):
     """Make all needed folders to store the final results.
+    
+    Args:
+        resultsdir (str): Top level folder for storing results.
+    
+    Returns:
+        None
     """
     directories = ['FoxMaskResults',
                    'FoxMaskResults/tables',
@@ -71,17 +94,16 @@ class Getimagesinfos:
 
     Images to be analyzed have the following attributes:
 
-    Attributes:
-        folder: A string representing the folder containing images
-        to be analyzed.
-        imglist: A list of images to be analyzed.
-        timeofcreation: A list containing images time of creation.
-
-
     """
 
     def __init__(self, folder):
-        """Initialize attributes used across functions.
+        """Initialize attributes used across methods.
+
+        Args:
+           folder (str): Actual folder containing images to analyze.
+           imglist (list): Actual list of image to analyze.
+           timeofcreation (list): A list containing images time of creation.
+
         """
         self.folder = folder
         self.imglist = None

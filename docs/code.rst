@@ -1,20 +1,27 @@
-==================
-Code documentation
-==================
+==============
+FoxMask module
+==============
 
 .. automodule:: foxmask
 
-Setup
-=====
+Gathering folders to analyze
+============================
 
-Images to analyze and metadata
-==============================
+.. autofunction:: getfolders
 
-The following class will gather all images in the folder
-being analyzed, and search in each image metadata
-for the ``DateTimeOriginal`` flag, which is the time the picture
-was taken. Based on the latter, groups of images are made.
+Creating results folders
+========================
+
+.. autofunction:: makeresultsfolder
+
+
+Building methods and attributes
+===============================
+
+FoxMask will create a dictionary of classes
+containing all methods and attributes needed
+to analyze images in each found folders.
 
 .. autoclass:: foxmask.Getimagesinfos
-   :members: getimageslist, getimagesmeta, sortimages,
+   :members: __init__, getimageslist, getimagesmeta, sortimages,
              getimpg
