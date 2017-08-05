@@ -66,7 +66,7 @@ copyright = '2017, Eric Devost'
 # built documents.
 #
 # The short X.Y version.
-version = 3.0.0
+version = "3.0.0"
 # The full version, including alpha/beta/rc tags.
 #release = version
 #version_file = '../version.properties'
