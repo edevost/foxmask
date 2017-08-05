@@ -129,7 +129,7 @@ int main(int argc, char **argv)
 		cout << "Input Sequence path " << config_obj.path << endl;
 
 
-		u32 training_frames = 4;
+		u32 training_frames = 5;
 
 #ifdef WRITEMASK
 
