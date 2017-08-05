@@ -26,22 +26,14 @@ used during the analysis.
 
 import csv
 import sys
-#sys.path.append("/usr/local/lib/python2.7/site-packages")
 import os
 import cv2
-from collections import defaultdict
-from numpy import genfromtxt
 import glob
-from itertools import groupby
 import time
-from datetime import datetime, date
+from datetime import datetime
 import shutil
 import exiftool
-import random
-import xlrd
 import parameters
-from fnmatch import filter, fnmatch
-from parameters import *
 
 time1 = time.time()
 
@@ -285,13 +277,13 @@ class Imagesanalysis(Getimagesinfos):
             im2, contoursE, hye = cv2.findContours(currentMask.copy(),
                                               cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
             areas = [cv2.contourArea(c) for c in contoursE]
-            for k in range(len(minsize)):
+            for k in range(len(parameters.minsize)):
                 if sum(areas) < 1:
                     imgresult = 0
                 else:
                     nobj = []
                     for area in areas:
-                        if area < minsize[k]:
+                        if area < parameters.minsize[k]:
                             nobj.append(0)
                         else:
                             nobj.append(1)
@@ -299,7 +291,7 @@ class Imagesanalysis(Getimagesinfos):
                         imgresult = 1
                     else:
                         imgresult = 0
-                resultrow = [self.maskslist[i], imgresult, minsize[k]]
+                resultrow = [self.maskslist[i], imgresult, parameters.minsize[k]]
                 print resultrow
             resultslist.append(resultrow)
         self.resultslist = resultslist
