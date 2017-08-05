@@ -60,7 +60,7 @@ def getfolders(foldersdir):
         foldersdir (str): Top level folder containing all folders to analyze.
     
     Returns:
-        list: A list of folders.
+        list: Folders to analyze.
     """
     if not os.path.exists(foldersdir):
         print(foldersdir,
@@ -105,8 +105,8 @@ class Getimagesinfos:
 
         Args:
            folder (str): Actual folder containing images to analyze.
-           imglist (list): Actual list of image to analyze.
-           timeofcreation (list): Actual list containing images time of creation.
+           imglist (list): Images to analyze.
+           timeofcreation (list): Images time of creation.
 
         """
         self.folder = folder
@@ -118,8 +118,7 @@ class Getimagesinfos:
         Generate a list of all images under `folder`
 
         Returns:
-           list: The list of images under the folder
-           being analyzed (**imglist**)
+           list: All images under the folder being analyzed.
 
         """
         imglist = []
@@ -145,8 +144,8 @@ class Getimagesinfos:
         >>> datetime.datetime(2014, 8, 6, 16, 5, 55)
 
         Returns:
-           list: List of datetime objects representing the exact
-           time of creation of each image (**timeofcreation**).
+           list: Datetime objects representing the exact
+           time of creation of each image.
 
         """
         timeofcreation = []
@@ -194,6 +193,9 @@ class Getimagesinfos:
             timeofcreation (date): A date object representing the
                 time of creation of each image.
 
+        Returns:
+            list: Sorted time of creation of all images to analyze.
+
         """
         sortedimglist = [x for (y,x) in sorted(zip(self.timeofcreation,
                                                    self.imglist))]
@@ -213,6 +215,9 @@ class Getimagesinfos:
             maxgap (int): An int representing the maximum gap
                 in seconds for two consecutive images to be considered as
                 being part of the same group.
+        
+        Returns:
+            list: Number of images in each group.
         """
         impg = []
         res  = []
