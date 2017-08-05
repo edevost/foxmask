@@ -11,13 +11,17 @@ line, from the root of the FoxMask repository.
     
   $ foxmask --foldersdir images --resultsdir .
 
-Args:
+
+The following module level attributes are passed
+via the command line interface.
+
+Attributes:
     foldersdir (str): The directory containing folders (one or many) with images 
-    to analyze. The default value is set to **images**.
+        to analyze. The default value is set to **images**.
 
     resultsdir (str): The location where to create the **FoxMaskResults**
-    directory. The default value is set to the actual 
-    directory where the ``foxmask`` command is launched.
+        directory. The default value is set to the actual 
+        directory where the ``foxmask`` command is launched.
 
 
 The ultimate output of this module is a ``Results``
@@ -56,7 +60,7 @@ def getfolders(foldersdir):
         foldersdir (str): Top level folder containing all folders to analyze.
     
     Returns:
-        list. A list of folders.
+        list: A list of folders.
     """
     if not os.path.exists(foldersdir):
         print(foldersdir,
@@ -102,7 +106,7 @@ class Getimagesinfos:
         Args:
            folder (str): Actual folder containing images to analyze.
            imglist (list): Actual list of image to analyze.
-           timeofcreation (list): A list containing images time of creation.
+           timeofcreation (list): Actual list containing images time of creation.
 
         """
         self.folder = folder
@@ -113,14 +117,9 @@ class Getimagesinfos:
         """
         Generate a list of all images under `folder`
 
-        .. note::
-            This function should be rewritten using ignore
-            case, and should be able to gather other images
-            format.
-
         Returns:
-           list. The list of images under the folder
-           being analyzed.
+           list: The list of images under the folder
+           being analyzed (**imglist**)
 
         """
         imglist = []
@@ -133,16 +132,21 @@ class Getimagesinfos:
 
     def getimagesmeta(self):
         """
-        Get metadata ``DateTimeOriginal`` from every
-        image in **imglist**
+        Generate a list of all images time of creation.
 
-        Format returned:
+        The time of creation is taken from the ``DateTimeOriginal``
+        key present in every image metadata. If the method can not read
+        the ``DateTimeOriginal`` key, it will look in the ``Comment`` key
+        trying to find the time of creation. Method will gracefully exit
+        if not time of creation can be found.
+
+        Example of format returned:
 
         >>> datetime.datetime(2014, 8, 6, 16, 5, 55)
 
         Returns:
-           list. List of datetime objects representing the exact
-           time of creation of each image.
+           list: List of datetime objects representing the exact
+           time of creation of each image (**timeofcreation**).
 
         """
         timeofcreation = []
@@ -183,8 +187,13 @@ class Getimagesinfos:
     def sortimages(self):
         """Sort images based on their time of creation.
 
-        This method makes sure images are appropriately sorted,
-        not relying on images file name.
+        This method makes sure images are appropriately sorted.
+        We do not want to rely on images file name to sort them.
+
+        Args:
+            timeofcreation (date): A date object representing the
+                time of creation of each image.
+
         """
         sortedimglist = [x for (y,x) in sorted(zip(self.timeofcreation,
                                                    self.imglist))]
@@ -195,16 +204,16 @@ class Getimagesinfos:
         return sortedimglist
 
     def getimpg(self):
-        '''
-        This will group images based on the differences in time between
-        each shot. It is crucial that the listtags are well sorted by
-        time.
+        """Group images based on their time of creation
 
-        Attributes:
-            parameters.maxgap: An int representing the maximum gap
-            in seconds for two consecutive images to be considered as
-            being part of the same group.
-        '''
+        This method will group images based on the differences in time between
+        each shot.
+
+        Args:
+            maxgap (int): An int representing the maximum gap
+                in seconds for two consecutive images to be considered as
+                being part of the same group.
+        """
         impg = []
         res  = []
         for x in self.sortedtimeofcreation:
