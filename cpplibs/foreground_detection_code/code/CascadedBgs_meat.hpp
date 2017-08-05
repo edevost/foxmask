@@ -805,8 +805,8 @@ template<typename eT> void CascadedBgs<eT>::create_foreground_mask(
 	Mat<eT> tmp_mask = this->cascadedBgsParams->likelihood_ratio_T * fg_wt_mtx;
 	Mat<u32> tmp_mask1 = conv_to<Mat<u32> >::from(tmp_mask);
 	// GET THE FOREGROUND MASK
-	Mat<u32> mask = fg_wts > tmp_mask1;
-
+	//Mat<u32> mask = fg_wts > tmp_mask1;
+        Mat<u32> mask = conv_to< Mat<u32> >::from(fg_wts > tmp_mask1); // workaround: recent versions of Armadillo use 64 bit integers in C++11 mode
 
 	//CONVERT THE MASK TO U8
 	mask1 = conv_to<Mat<unsigned char> >::from(mask);
