@@ -57,8 +57,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = project_metadata["name"]
-author = project_metadata["author"]
+project = "FoxMask"
+author = "Eric Devost"
 copyright = '2017, Eric Devost'
 
 # The version info for the project you're documenting, acts as replacement for
