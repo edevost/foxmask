@@ -51,25 +51,16 @@ cd ~/foxmask
 sudo pip install -r requirements.txt
 sudo pip install .
 sudo cp vagrant/Fox1.jpg /usr/share/backgrounds/xfce/
-# If on google cloud, make the machine available
-# with a connection via turbovnc.
-# vnc4server might work better.
-if curl metadata.google.internal -i ; then
 cd ~/
-wget https://sourceforge.net/projects/virtualgl/files/2.5.2/virtualgl_2.5.2_amd64.deb
-wget https://sourceforge.net/projects/turbovnc/files/2.1/turbovnc_2.1_amd64.deb
-sudo apt-get -y install xfce4 xfce4-goodies
-sudo dpkg -i turbovnc_2.1_amd64.deb
-sudo dpkg -i virtualgl_2.5.2_amd64.deb
+# If on google cloud, use the cpplibs
+# without gui.
+if curl metadata.google.internal -i ; then
 
-mkdir /home/$USER/.vnc
-cat << EOF > /home/$USER/.vnc/xstartup.turbovnc
-#!/bin/sh
-xrdb $HOME/.Xresources
-startxfce4 &
-EOF
-chmod 755 ~/.vnc/xstartup.turbovnc
-else
-    echo "Not on GCE"
-
+    git clone https://github.com/edevost/foxmask-cpplibs-headless.git
+    cd foxmask-cpplibs-headless/image-segmentation-code/background_estimation_code/code/
+    g++ -L/usr/lib -L/usr/local/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
+    sudo cp EstimateBackground /usr/local/bin
+    cd ~/foxmask-cpplibs-headless/image-segmentation-code/background_estimation_code/code/
+    g++ -o ForegroundSegmentation main.cpp input_preprocessor.cpp -O2 -fopenmp -I/usr/include/opencv -L/usr/lib64  -L/usr/lib -L/usr/local/lib -larmadillo -lopencv_core -lopencv_highgui -lopencv_imgproc
+    cp ForegroundSegmentation /usr/local/bin    
 fi
