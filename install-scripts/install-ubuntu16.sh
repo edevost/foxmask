@@ -48,8 +48,8 @@ sudo cp ForegroundSegmentation /usr/local/bin
 
 
 cd ~/foxmask
-python2 -m pip install -r requirements.txt --user
-pip install . --user
+sudo pip install -r requirements.txt
+sudo pip install .
 sudo cp vagrant/Fox1.jpg /usr/share/backgrounds/xfce/
 # If on google cloud, make the machine available
 # with a connection via turbovnc.
