@@ -27,7 +27,7 @@ objects are also copied in subfolders.
 
 
 Running the code on your own set
---------------------------------
+================================
 
 To run the code on your own set of images, simply specify
 where the folders containing the images are located. For
@@ -44,8 +44,20 @@ that the more folders, the more the analysis will take time.
 We suggest testing the software on just one folder to see
 how it behaves on your images, and learn it's functioning.
 
-The are a few constraints concerning the folders and the images
-to be analyzed:
+.. note::
+
+   You do not need to be in the ``foxmask`` directory to run the command.
+   Just make sure to specify to path to your images directory relative
+   to where you are launching the foxmask command, or specify an
+   absolute path as in the example above. The same applies for where
+   you want the results to be written.
+
+
+Constraints
+-----------
+
+The are a few minor constraints concerning the folders structure containing the
+images to be analyzed and the format of the images.
 
 Folders naming and structure
   All folders to be analyzed should have a descriptive name, as FoxMask
@@ -61,7 +73,7 @@ Images naming and format
 .. _issue number 45: https://github.com/edevost/foxmask/issues/45
 
 Configuration
--------------
+=============
 
 There are a few values that can be parametrized in the
 ``parameters.py`` file. However, the defaults should
@@ -83,3 +95,16 @@ minsize
   parameters on your images to determine the best value. Keep in mind
   that with lower values, the risk of getting false positive is higher and
   with higher value, the risk of getting false negative is higher.
+
+
+Image analysis pipeline
+=======================
+
+Setting up an image analysis pipeline should be done by using code
+under version control (e.g. git). It should be 100% automated and
+documented, even for small jobs. It's the only way to use efficiently
+any analysis software.
+
+The FoxMask team will implement such a pipeline in the near future,
+and will make it freely available as a real word example of how
+to implement FoxMask in a fully automated image analysis pipeline.
