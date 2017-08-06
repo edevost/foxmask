@@ -271,13 +271,13 @@ class Imagesanalysis(Getimagesinfos):
                 imggray1 = cv2.cvtColor(currentFrame.copy(), cv2.COLOR_BGR2GRAY)
                 imggray2 = imggray1[120:-10, 1:-10]
                 avgB = cv2.mean(imggray2)
-                outf = open(os.path.join(parameters.paramsdir, 'params.txt'), 'w')
+                outf = open('/tmp/params.txt', 'w')
                 if avgB[0] < 100.0:
                     print 'Low light', avgB
-                    outf.write(str(0.001))
+                    outf.write(str(0.002))
                 else:
                     print 'High light', avgB
-                    outf.write(str(0.001))
+                    outf.write(str(0.002))
                 resizimg1 = cv2.resize(currentFrame, (0, 0), fx=0.3, fy=0.3)
                 print "images", image
                 formatedname = os.path.join(tempdir, os.path.basename(
@@ -287,9 +287,9 @@ class Imagesanalysis(Getimagesinfos):
                 print formatedname
                 cv2.imwrite(formatedname, resizimg1)
                 print "Saving resized image as", formatedname
-            cppcom1 = [parameters.cppex, tempdir + '/', 'EstBG']
+            cppcom1 = ["EstimateBackground", tempdir + '/', 'EstBG']
             cppcom = ' '.join(cppcom1)
-            cppcom2 = [parameters.cppex2, tempdir + '/', foldersdir + '/MasksResults']
+            cppcom2 = ["ForegroundSegmentation", tempdir + '/', foldersdir + '/MasksResults']
             cppfg     = ' '.join(cppcom2)
             os.system(cppcom)
             os.system(cppfg)
