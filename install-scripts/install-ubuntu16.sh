@@ -17,7 +17,8 @@ sudo apt-get -y install unzip
 sudo apt-get -y install mingetty
 
 sudo apt-get -y install build-essential libgtk2.0-dev libjpeg-dev libtiff5-dev libjasper-dev libopenexr-dev python-dev python-numpy python-tk libtbb-dev libeigen3-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev libqt4-dev libqt4-opengl-dev sphinx-common libv4l-dev libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev default-jdk ant libvtk5-qt4-dev
-sudo apt-get -qq install libopencv-dev build-essential checkinstall cmake pkg-config yasm libjpeg-dev libjasper-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libxine2 libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev python-dev python-numpy libtbb-dev libqt4-dev libgtk2.0-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils
+
+sudo apt-get -y install libopencv-dev checkinstall yasm libavcodec-dev libavformat-dev libswspcale-dev libdc1394-22-dev libxine2 libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libqt4-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils
 
 sudo apt-get -y install libimage-exiftool-perl
 
@@ -27,38 +28,9 @@ sudo apt-get install xfce4
 fi
 
 # Armadillo
-cd ~/
-wget http://sourceforge.net/projects/arma/files/armadillo-7.950.1.tar.xz
-tar -xf armadillo-7.950.1.tar.xz
+sudo apt-get instal libarmadillo6-dev
 
-cd armadillo-7.950.1/
-cmake .
-make
-sudo make install
-cd ~/
-
-# Pyexiftool
-git clone git://github.com/smarnach/pyexiftool.git
-cd pyexiftool/
-sudo python2 setup.py install
-
-cd ~/
-
-# OpenCV2
-
-wget http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.9/opencv-2.4.9.zip
-unzip opencv-2.4.9.zip
-cd opencv-2.4.9
-mkdir build
-cd build
-cmake -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D WITH_VTK=ON -D CMAKE_INSTALL_PREFIX=/usr/ ..
-make -j8
-sudo make install -j8
-
-cd ~/
 # FoxMask
-
-git clone https://github.com/edevost/foxmask.git
 cd ~/foxmask/cpplibs/background_estimation_code/code/
 
 g++ -L/usr/lib -L/usr/local/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
