@@ -19,7 +19,10 @@ sudo apt-get install xfce4
 fi
 
 # Armadillo
-sudo apt-get instal libarmadillo6-dev
+sudo apt-get instal libarmadillo6 libarmadillo-dev
+
+# Open CV
+sudo apt-get install python-opencv libopencv-dev
 
 # FoxMask
 cd ~/foxmask/cpplibs/background_estimation_code/code/
@@ -30,11 +33,16 @@ cd ~/foxmask/cpplibs/foreground_detection_code/code/
 
 g++ -o ForegroundSegmentation main.cpp input_preprocessor.cpp -O2 -fopenmp -I/usr/include/opencv -L/usr/lib64  -L/usr/lib -L/usr/local/lib -larmadillo -lopencv_core -lopencv_highgui -lopencv_imgproc
 
+sudo cp ForegroundSegmentation /usr/local/bin
+sudo cp EstimateBackground /usr/local/bin
+
 cd ~/foxmask
 sudo python2 -m pip install -r requirements.txt
+sudo pip install .
 
 # If on google cloud, make the machine available
 # with a connection via turbovnc.
+# vnc4server might work better.
 if curl metadata.google.internal -i ; then
 cd ~/
 wget https://sourceforge.net/projects/virtualgl/files/2.5.2/virtualgl_2.5.2_amd64.deb
@@ -49,6 +57,7 @@ cat << EOF > /home/$USER/.vnc/xstartup.turbovnc
 xrdb $HOME/.Xresources
 startxfce4 &
 EOF
+chmod 755 ~/.vnc/xstartup.turbovnc
 else
     echo "Not on GCE"
 
