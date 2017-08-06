@@ -180,41 +180,24 @@ int main(int argc, char **argv)
 	vector<int> params;
 	// get path for output dir
 	//QString respath = QDir(path).filePath(estimatedBG);
-	params.push_back(CV_IMWRITE_JPEG_QUALITY);
-	params.push_back(99);
-	estimatedBG.append("_0000.jpg");
-	cout << "bg name : " << estimatedBG << endl;
+        for( int a = 0; a < 10; a = a + 1 ) {
+          respath = argv[1];
+          estimatedBG = argv[2];
+          std::string prefix = "_000";
+          std::string suffix = ".jpg";
+          std::string result = "";
+          result = prefix + std::to_string(a) + suffix;
+          params.push_back(CV_IMWRITE_JPEG_QUALITY);
+          params.push_back(99);
+          estimatedBG.append(result);
+          cout << "bg name : " << estimatedBG << endl;
+          respath.append(estimatedBG);
+          cout << "respath : " << respath  << endl;
+          cv::imwrite(respath.c_str() ,Obj.estimated_bg_frame,params);
+        
+        }
+   
 	
-	
-	respath.append(estimatedBG);
-	cout << "respath : " << respath  << endl;
-	cv::imwrite(respath.c_str() ,Obj.estimated_bg_frame,params);
-	// second saving
-	respath = argv[1];
-	estimatedBG = argv[2];
-	estimatedBG.append("_0001.jpg");
-	respath.append(estimatedBG);
-	cout << "respath : " << respath  << endl;
-	cv::imwrite(respath.c_str() ,Obj.estimated_bg_frame,params);
-	// third saving
-	respath = argv[1];
-	estimatedBG = argv[2];
-	estimatedBG.append("_0002.jpg");
-	respath.append(estimatedBG);
-	cout << "respath : " << respath  << endl;
-	cv::imwrite(respath.c_str() ,Obj.estimated_bg_frame,params);
-	// fourth saving
-	respath = argv[1];
-	estimatedBG = argv[2];
-	estimatedBG.append("_0003.jpg");
-	respath.append(estimatedBG);
-	cout << "respath : " << respath  << endl;
-	cv::imwrite(respath.c_str() ,Obj.estimated_bg_frame,params);
-
-	
-	//cv::imwrite(respath.c_str() ,Obj.estimated_bg_frame,params);
-	
-
 	cout << "Processing a " << width << " x " << height
 			<< " image with " << channels << " channels" << endl;
 
