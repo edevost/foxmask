@@ -12,4 +12,8 @@ old/.DS_store
 build/*
 dist/*
 .eggs/*
-
+*egg*
+FoxMaskResults
+src
+cpplibs/foreground_detection_code/code/ForegroundSegmentation
+cpplibs/background_estimation_code/code/EstimateBackground

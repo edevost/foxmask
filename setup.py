@@ -38,7 +38,7 @@ class WriteVersionFile(Command):
             f.write("VERSION = {!s}\n".format(
                 self.distribution.metadata.version))
         print("get version")
-        
+
 
 class Cookiecutter(Command):
     """
@@ -149,7 +149,7 @@ class Documentation(Command):
     def _canonical_directories(self):
         self.dist_root = Path(self.dist_dir)
         #self.dist_root.mkdir(exist_ok=True, parents=True)
-        try: 
+        try:
             os.makedirs(self.dist_dir)
         except OSError:
             if not os.path.isdir(self.dist_dir):
@@ -158,7 +158,7 @@ class Documentation(Command):
         self.build_root = Path(self.build_root)
         #self.build_root.mkdir(exist_ok=True, parents=True)
         print (self.build_root)
-        try: 
+        try:
             os.makedirs(str(self.build_root))
         except OSError:
             if not os.path.isdir(str(self.build_root)):
@@ -187,7 +187,7 @@ class Documentation(Command):
         sphinx.build_main([str(arg) for arg in all_sphinx_opts])
 
         shutil.rmtree(str(dist_dir), ignore_errors=True)
-        try: 
+        try:
             os.makedirs(str(dist_dir.parent))
         except OSError:
             if not os.path.isdir(self.dist_dir):
@@ -199,7 +199,6 @@ class Documentation(Command):
 
 class BakedDocumentation(Command):
     """
-
     """
     description = 'create documentation distribution from baked project'
     user_options = []
@@ -284,8 +283,8 @@ class Clean(Command):
 def get_distribution_info():
     return dict(
         name='foxmask',
-        packages=[],
-        version='1.0.1',
+        packages=['foxmask'],
+        version='2.1',
         description='Python package to analyse camera traps images',
         author='Eric Devost',
         license='GNU General Public License v3',
@@ -311,6 +310,10 @@ def get_distribution_info():
             'Programming Language :: Python :: Implementation :: CPython',
             'Topic :: Software Development'
         ],
+        entry_points='''
+        [console_scripts]
+        foxmask=foxmask.__main__:main
+     ''',
     )
 
 
@@ -323,7 +326,6 @@ def working_directory(path):
     """
     A context manager which changes the working directory to the given
     path, and then changes it back to its previous value on exit.
-
     """
     prev_cwd = os.getcwd()
     os.chdir(str(path))

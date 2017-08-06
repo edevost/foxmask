@@ -14,33 +14,32 @@
 
 import sys
 import os
-import shlex
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../foxmask'))
 
 import foxmask
-from setup import get_distribution_info
+#from setup import get_distribution_info
 
-project_metadata = get_distribution_info()
+#project_metadata = get_distribution_info()
 
 
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-needs_sphinx = '1.5.1'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.viewcode',
+    'sphinxcontrib.napoleon',
+    #'sphinx.ext.doctest',
+    #'sphinx.ext.todo',
+    #'sphinx.ext.coverage',
+    #'sphinx.ext.viewcode',
     #"sphinx_autodoc_typehints",
 ]
 
@@ -59,8 +58,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = project_metadata["name"]
-author = project_metadata["author"]
+project = "FoxMask"
+author = "Eric Devost"
 copyright = '2017, Eric Devost'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -68,7 +67,7 @@ copyright = '2017, Eric Devost'
 # built documents.
 #
 # The short X.Y version.
-version = project_metadata["version"]
+version = "3.0.0"
 # The full version, including alpha/beta/rc tags.
 #release = version
 #version_file = '../version.properties'
@@ -271,10 +270,10 @@ htmlhelp_basename = 'cookiecutter-pydoc'
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'cookiecutter-python', 'cookiecutter-python Documentation',
-     [author], 1)
-]
+#man_pages = [
+#    (master_doc, 'cookiecutter-python', 'cookiecutter-python Documentation',
+#     [author], 1)
+#]
 
 # If true, show URL addresses after external links.
 #man_show_urls = False
@@ -285,11 +284,11 @@ man_pages = [
 # Grouping the document tree into Texinfo files. List of tuples
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
-texinfo_documents = [
-  (master_doc, 'cookiecutter-python', 'cookiecutter-python Documentation',
-   author, 'cookiecutter-python', 'One line description of project.',
-   'Miscellaneous'),
-]
+#texinfo_documents = [
+#  (master_doc, 'cookiecutter-python', 'cookiecutter-python Documentation',
+#   author, 'cookiecutter-python', 'One line description of project.',
+#   'Miscellaneous'),
+#]
 
 # Documents to append as an appendix to all manuals.
 #texinfo_appendices = []

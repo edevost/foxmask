@@ -1,32 +1,29 @@
-==================
-Code documentation
-==================
+==============
+FoxMask module
+==============
 
 .. automodule:: foxmask
 
-Setup
-=====
+Gathering folders to analyze
+============================
 
-The following class will do all the preliminary
-setup required to run the code and clean
-temporary files and directories. One variable
-residing in ``parameters.py`` can be parametrised:
-**rmmasks**, defining if resulting masks should be
-kept. This could be useful, for example, for visual
-evaluation of the analysis.
+.. autofunction:: getfolders
+
+Creating results folders
+========================
+
+.. autofunction:: makeresultsfolder
 
 
-.. autoclass:: foxmask.Setup
-   :members: getfolders, maketempdir, delmaskresults
+Building methods and attributes
+===============================
 
-Images to analyze and metadata
-==============================
+FoxMask will create a dictionary of classes
+containing all methods and attributes needed
+to analyze images in each found folders. Thus, the
+:class:`foxmask.Getimagesinfo` class will be stored
+in a dictionary, one class for each folder being analyzed.
 
-The following class will gather all images in the folder
-being analysed, and search in each image metadata
-for the ``DateTimeOriginal``, which is the time the picture
-was taken. Based on the latter, groups of images are made.
-
-.. autoclass:: Getimagesinfos
-   :members: getimageslist, getimagesmeta, sortimages,
+.. autoclass:: foxmask.Getimagesinfos
+   :members: __init__, getimageslist, getimagesmeta, sortimages,
              getimpg

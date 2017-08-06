@@ -14,34 +14,97 @@ directory:
 
 .. code-block:: console
 
-   python2 foxmask.py
+    foxmask --foldersdir images --resultsdir .
 
-This will launch the analysis process. You will see images being
-analyzed and mask created. At the end of the process, a CSV file is
-exported with the image names and the presence of detected objects (0 or 1).
-If required, masks and images with detected objects are also copied in subfolders.
+This will launch the analysis process on the default set of images
+distributed with FoxMask. Theses images resides in the ``images``
+folder. The results will be written in the FoxMaskResults folder.
+
+As the code run, you will see images being analyzed and mask created. At the end of
+the process, a CSV file is exported with the image names and the presence
+of detected objects (0 or 1). If required, masks and images with detected
+objects are also copied in subfolders.
+
+
+Running the code on your own set
+================================
+
+To run the code on your own set of images, simply specify
+where the folders containing the images are located. For
+example:
+
+.. code-block:: console
+
+   foxmask --foldersdir /media/reconyximages/2015 --resultsdir analysis/results
+
+This will launch the analysis on all folders present in
+``/media/reconyximages/2015``. There is no limits in the
+number of folders that can be analyzed. Just keep in mind
+that the more folders, the more the analysis will take time.
+We suggest testing the software on just one folder to see
+how it behaves on your images, and learn it's functioning.
+
+.. note::
+
+   You do not need to be in the ``foxmask`` directory to run the command.
+   Just make sure to specify to path to your images directory relative
+   to where you are launching the foxmask command, or specify an
+   absolute path as in the example above. The same applies for where
+   you want the results to be written.
+
+
+Constraints
+-----------
+
+The are a few minor constraints concerning the folders structure containing the
+images to be analyzed and the format of the images.
+
+Folders naming and structure
+  All folders to be analyzed should have a descriptive name, as FoxMask
+  will store the results using the names of these folders. Also,
+  every folder should contains images and **no** sub folders.
+
+Images naming and format
+  Your images should be in the jpeg format, with the proper extension
+  (e.g. image-01.jpg, or image-01.jpeg). The case does not matter, as well
+  as the name of the image. A future version of foxmask will be able to analyze
+  other image format. See `issue number 45`_
+
+.. _issue number 45: https://github.com/edevost/foxmask/issues/45
 
 Configuration
--------------
+=============
 
-Configuration of where the images sets are as well as where
-to write results are all confined in the file ``parameters.py``.
-In this file you will find configurable variables used when
-the program is executed:
-
-imagesDir
-  The directory where the images to analyze are located. This directory
-  can be anywhere (shared folder, usb drive, local disk), it just need
-  to be accessible by your machine running FoxMask. It can consist of
-  one single folder or a set of folders. FoxMask will iterate through
-  the folders and analyze them all.
-
-outputDir
-  The location where the results of the analysis will be written
+There are a few values that can be parametrized in the
+``parameters.py`` file. However, the defaults should
+be sane enough for allowing testing the software on
+your own set of images.
 
 maxgap
   The maximum time gap (in seconds) between two consecutive images
-  to build the sequence.
+  to be considered as part of the same sequence. This parameter
+  is set by default to 5 seconds. Under conditions where the
+  background is dynamic (e.g. movements in static objects occurs),
+  the ``maxgap`` parameter should not be raised very high. However,
+  under conditions where the background is very static, higher values
+  might be best.
 
 minsize
-  Minimum size of moving objects to be considered as an animal
+  Minimum size of moving objects to be considered as an animal. This
+  value is set by default to 500 pixels. You will need to test this
+  parameters on your images to determine the best value. Keep in mind
+  that with lower values, the risk of getting false positive is higher and
+  with higher value, the risk of getting false negative is higher.
+
+
+Image analysis pipeline
+=======================
+
+Setting up an image analysis pipeline should be done by using code
+under version control (e.g. git). It should be 100% automated and
+documented, even for small jobs. It's the only way to use efficiently
+any analysis software.
+
+The FoxMask team will implement such a pipeline in the near future,
+and will make it freely available as a real word example of how
+to implement FoxMask in a fully automated image analysis pipeline.
