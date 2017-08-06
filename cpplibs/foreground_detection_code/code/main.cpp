@@ -46,7 +46,7 @@ float getpar()
 float datas;
      ifstream infile;
 //float datas;
-     infile.open("./cpplibs/foreground_detection_code/code/params.txt");
+     infile.open("/tmp/params.txt");
      infile >> datas;
      cout << "data" << endl;
      cout << datas << endl;
