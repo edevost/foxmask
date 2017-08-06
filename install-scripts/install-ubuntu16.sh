@@ -16,6 +16,15 @@ sudo apt-get -y install libimage-exiftool-perl
 # If we are on vagrant, install xfce desktop
 if [ -d "/home/vagrant" ];then
 sudo apt-get -y install xfce4
+cat << EOF > /home/vagrant/.bash_profile
+sed 's/\b\/agetty\b/& vagrant/' /etc/systemd/system/getty.target.wants/getty@tty1.service
+#starx on login
+if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
+ . startx
+ logout
+fi
+EOF
+    
 fi
 
 # Armadillo
