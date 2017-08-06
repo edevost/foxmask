@@ -37,7 +37,7 @@
 
 
 //writes the foreground masks to the below location if WRITEMASK is defined in main.hpp
-const string mask_save_path = "./";
+const string mask_save_path = "";
 
 /* read params file*/;
 
@@ -129,7 +129,7 @@ int main(int argc, char **argv)
 		cout << "Input Sequence path " << config_obj.path << endl;
 
 
-		u32 training_frames = 5;
+		u32 training_frames = 10;
 
 #ifdef WRITEMASK
 
