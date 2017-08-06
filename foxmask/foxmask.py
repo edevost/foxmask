@@ -274,10 +274,10 @@ class Imagesanalysis(Getimagesinfos):
                 outf = open('/tmp/params.txt', 'w')
                 if avgB[0] < 100.0:
                     print 'Low light', avgB
-                    outf.write(str(0.002))
+                    outf.write(str(0.001))
                 else:
                     print 'High light', avgB
-                    outf.write(str(0.002))
+                    outf.write(str(0.001))
                 resizimg1 = cv2.resize(currentFrame, (0, 0), fx=0.3, fy=0.3)
                 print "images", image
                 formatedname = os.path.join(tempdir, os.path.basename(
