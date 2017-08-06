@@ -60,7 +60,8 @@ if curl metadata.google.internal -i ; then
     cd foxmask-cpplibs-headless/image-segmentation-code/background_estimation_code/code/
     g++ -L/usr/lib -L/usr/local/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
     sudo cp EstimateBackground /usr/local/bin
-    cd ~/foxmask-cpplibs-headless/image-segmentation-code/background_estimation_code/code/
+    cd ~/foxmask-cpplibs-headless/image-segmentation-code/foreground_detection_code/code/
     g++ -o ForegroundSegmentation main.cpp input_preprocessor.cpp -O2 -fopenmp -I/usr/include/opencv -L/usr/lib64  -L/usr/lib -L/usr/local/lib -larmadillo -lopencv_core -lopencv_highgui -lopencv_imgproc
-    cp ForegroundSegmentation /usr/local/bin    
+
+cp ForegroundSegmentation /usr/local/bin    
 fi
