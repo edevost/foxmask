@@ -5,16 +5,7 @@
 # Intended to be run as user, in /home/user
 cd ~/
 sudo apt-get update
-sudo apt-get -y install cmake
-sudo apt-get -y install libblas-dev
-sudo apt-get -y install liblapack-dev
-sudo apt-get -y install libsuperlu-dev
-sudo apt-get -y install libarpack2
-sudo apt-get -y install libarpack2-dev
-sudo apt-get -y install pkg-config
-sudo apt-get -y install python-pip
-sudo apt-get -y install unzip
-sudo apt-get -y install mingetty
+sudo apt-get -y install cmake libblas-dev liblapack-dev libsuperlu-dev libarpack2 libarpack2-dev pkg-config python-pip unzip mingetty
 
 sudo apt-get -y install build-essential libgtk2.0-dev libjpeg-dev libtiff5-dev libjasper-dev libopenexr-dev python-dev python-numpy python-tk libtbb-dev libeigen3-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev libqt4-dev libqt4-opengl-dev sphinx-common libv4l-dev libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev default-jdk ant libvtk5-qt4-dev
 
