@@ -16,8 +16,8 @@ sudo apt-get -y install libimage-exiftool-perl
 # If we are on vagrant, install xfce desktop
 if [ -d "/home/vagrant" ];then
 sudo apt-get -y install xfce4
-sed -i 's/\b\/agetty\b/& vagrant/' /etc/systemd/system/getty.target.wants/getty@tty1.service
-cat << EOF > /home/vagrant/.bash_profile
+sudo sed -i 's/\b\/agetty\b/& -a vagrant/' /etc/systemd/system/getty.target.wants/getty@tty1.service
+cat << 'EOF' > /home/vagrant/.bash_profile
 #starx on login
 if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
  . startx
@@ -48,8 +48,8 @@ sudo cp ForegroundSegmentation /usr/local/bin
 
 
 cd ~/foxmask
-sudo python2 -m pip install -r requirements.txt
-sudo pip install .
+python2 -m pip install -r requirements.txt --user
+pip install . --user
 sudo cp vagrant/Fox1.jpg /usr/share/backgrounds/xfce/
 # If on google cloud, make the machine available
 # with a connection via turbovnc.
