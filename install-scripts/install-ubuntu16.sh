@@ -15,14 +15,14 @@ sudo apt-get -y install libimage-exiftool-perl
 
 # If we are on vagrant, install xfce desktop
 if [ -d "/home/vagrant" ];then
-sudo apt-get install xfce4
+sudo apt-get -y install xfce4
 fi
 
 # Armadillo
-sudo apt-get instal libarmadillo6 libarmadillo-dev
+sudo apt-get -y install libarmadillo6 libarmadillo-dev
 
 # Open CV
-sudo apt-get install python-opencv libopencv-dev
+sudo apt-get -y install python-opencv libopencv-dev
 
 # FoxMask
 cd ~/foxmask/cpplibs/background_estimation_code/code/
