@@ -19,7 +19,7 @@ sudo apt-get install xfce4
 fi
 
 # Armadillo
-sudo apt-get instal libarmadillo6 libarmadillo-dev
+sudo apt-get install libarmadillo6 libarmadillo-dev
 
 # Open CV
 sudo apt-get install python-opencv libopencv-dev
