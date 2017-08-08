@@ -9,14 +9,14 @@ line, from the root of the FoxMask repository.
 
 .. code-block:: console
     
-  $ foxmask --foldersdir images --resultsdir .
+  $ foxmask --srcdir images --resultsdir .
 
 
 The following module level attributes are passed
 via the command line interface.
 
 Attributes:
-    foldersdir (str): The directory containing folders (one or many) with images 
+    srcdir (str): The directory containing folders (one or many) with images 
         to analyze. The default value is set to **images**.
 
     resultsdir (str): The location where to create the **FoxMaskResults**
@@ -48,27 +48,27 @@ import parameters
 time1 = time.time()
 
 
-def getfolders(foldersdir):
-    """Get the list of all folders in **foldersdir**
+def getfolders(srcdir):
+    """Get the list of all folders in **srcdir**
 
     FoxMask needs a list of folders containing images to analyze.
     Each folder must strictly contain a set of images. No subfolders
-    are allowed. Code will gracefully exit if the **foldersdir** argument
+    are allowed. Code will gracefully exit if the **srcdir** argument
     does not exist.
 
     Args:
-        foldersdir (str): Top level folder containing all folders to analyze.
+        srcdir (str): Top level folder containing all folders to analyze.
     
     Returns:
         list: Folders to analyze.
     """
-    if not os.path.exists(foldersdir):
-        print(foldersdir,
+    if not os.path.exists(srcdir):
+        print(srcdir,
               "directory does not exist !")
         sys.exit()
 
-    folderslist = os.walk(foldersdir).next()[1]
-    folderslist = [foldersdir + '/' + s for s in folderslist]
+    folderslist = os.walk(srcdir).next()[1]
+    folderslist = [srcdir + '/' + s for s in folderslist]
     if "images/MasksResults" in folderslist: folderslist.remove("images/MasksResults")
     print folderslist
     return folderslist
@@ -247,7 +247,7 @@ class Imagesanalysis(Getimagesinfos):
 
     """
 
-    def bgfgestimation(self, sortedimglist, impg, foldersdir):
+    def bgfgestimation(self, sortedimglist, impg, srcdir):
         """Estimate background model and perform
         foreground segmentation.
 
@@ -256,7 +256,7 @@ class Imagesanalysis(Getimagesinfos):
             by a factor of 1/3 (0.3). (Link to code).
 
          """
-        tempdir = foldersdir + '/temp1'
+        tempdir = srcdir + '/temp1'
 
         for sequence in range(len(impg)):
             print "Analyzing sequence ", sequence + 1
@@ -289,7 +289,7 @@ class Imagesanalysis(Getimagesinfos):
                 print "Saving resized image as", formatedname
             cppcom1 = ["EstimateBackground", tempdir + '/', 'EstBG']
             cppcom = ' '.join(cppcom1)
-            cppcom2 = ["ForegroundSegmentation", tempdir + '/', foldersdir + '/MasksResults']
+            cppcom2 = ["ForegroundSegmentation", tempdir + '/', srcdir + '/MasksResults']
             cppfg     = ' '.join(cppcom2)
             os.system(cppcom)
             os.system(cppfg)
@@ -333,11 +333,11 @@ class Imagesanalysis(Getimagesinfos):
         self.resultslist = resultslist
         return resultslist
 
-    def getmaskslist(self, foldersdir):
+    def getmaskslist(self, srcdir):
         """
         Create a sorted list of generated masks.
         """
-        resmasks = foldersdir + '/MasksResults'
+        resmasks = srcdir + '/MasksResults'
         todelete = glob.glob(resmasks + '/EstBG*')
         for c in todelete:
             os.remove(c)
