@@ -154,9 +154,9 @@ int main(int argc, char **argv)
 	cv::Mat input_img_mtx;
 
 	cvNamedWindow("mainWin1", CV_WINDOW_NORMAL);
-	cvMoveWindow("mainWin1", 400, 40);
+	//cvMoveWindow("mainWin1", 400, 40);
 	cvNamedWindow("mainWin2", CV_WINDOW_NORMAL);
-	cvMoveWindow("mainWin2", 900, 40);
+	//cvMoveWindow("mainWin2", 900, 40);
 
 
 	ltemp = atoi(frno.c_str());

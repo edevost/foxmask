@@ -29,9 +29,9 @@ InputPreprocessor::InputPreprocessor(const rowvec &cur_param_vec,
 	initialise_algorithm_parameters(cur_param_vec);
 
 	cvNamedWindow("mainWin1", CV_WINDOW_AUTOSIZE);
-	cvMoveWindow("mainWin1", 600, 40);
+	//cvMoveWindow("mainWin1", 600, 40);
 	cvNamedWindow("mainWin2", CV_WINDOW_AUTOSIZE);
-	cvMoveWindow("mainWin2", 1000, 40);
+	//cvMoveWindow("mainWin2", 1000, 40);
 
 }
 
