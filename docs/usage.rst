@@ -4,45 +4,64 @@
 Usage
 =====
 
-FoxMask program is shipped with a sample images directory (images/example/)
-where you will find 50 jpeg images of Arctic fox. We encourage you to test
-FoxMask on this sample of images.
+FoxMask program is shipped with a sample of images located in the
+``images`` directory, where you will find two other directories (example-1
+and example-2) containing jpeg images of Arctic fox. We encourage you to test
+FoxMask on theses samples first. The full analysis takes around 2 minutes on
+an intel core i5.
 
-To run FoxMask on the default provided set of images, you
-simply have to run the following command, from the ``foxmask``
-directory:
+To run FoxMask, simply invoke it from the command line.
 
 .. code-block:: console
 
-    foxmask --foldersdir images --resultsdir .
+   $ foxmask
+   Usage: foxmask [OPTIONS] SRCDIR RESULTSDIR
 
-This will launch the analysis process on the default set of images
-distributed with FoxMask. Theses images resides in the ``images``
-folder. The results will be written in the FoxMaskResults folder.
+   Error: Missing argument "srcdir".
+
+Without argument, the software will exit and print it's usage and
+what argument is missing. The first argument [SRCDIR] is
+the directory where all your directories containing images are.
+The second argument [RESULTDIR] is the directory where you want the
+results to be created. For example:
+
+.. code-block:: console
+
+   $ foxmask images .
+
+Will launch the software and run the analysis for all directories
+present in the ``images`` directory  and create ``FoxMaskResults`` in your
+current directory (.). If you are launching the application in the foxmask
+directory, the command will launch the analysis process on the default
+set of images distributed with FoxMask and write it's results in
+``FoxMaskResults``.
 
 As the code run, you will see images being analyzed and mask created. At the end of
 the process, a CSV file is exported with the image names and the presence
 of detected objects (0 or 1). If required, masks and images with detected
-objects are also copied in subfolders.
+objects are also copied in subdirectorys.
 
 
 Running the code on your own set
 ================================
 
 To run the code on your own set of images, simply specify
-where the folders containing the images are located. For
+where the directorys containing the images are located. For
 example:
 
 .. code-block:: console
 
-   foxmask --foldersdir /media/reconyximages/2015 --resultsdir analysis/results
+   foxmask /media/reconyximages/2015  analysis/results
 
-This will launch the analysis on all folders present in
+This will launch the analysis on all directorys present in
 ``/media/reconyximages/2015``. There is no limits in the
-number of folders that can be analyzed. Just keep in mind
-that the more folders, the more the analysis will take time.
-We suggest testing the software on just one folder to see
+number of directorys that can be analyzed. Just keep in mind
+that the more directorys, the more the analysis will take time.
+We suggest testing the software on just one directory to see
 how it behaves on your images, and learn it's functioning.
+
+The results will be written in the ``analysis/results``
+directory
 
 .. note::
 
@@ -56,13 +75,13 @@ how it behaves on your images, and learn it's functioning.
 Constraints
 -----------
 
-The are a few minor constraints concerning the folders structure containing the
+The are a few minor constraints concerning the directorys structure containing the
 images to be analyzed and the format of the images.
 
-Folders naming and structure
-  All folders to be analyzed should have a descriptive name, as FoxMask
-  will store the results using the names of these folders. Also,
-  every folder should contains images and **no** sub folders.
+Directorys naming and structure
+  All directorys to be analyzed should have a descriptive name, as FoxMask
+  will store the results using the names of these directorys. Also,
+  every directory should contains images and **no** sub directorys.
 
 Images naming and format
   Your images should be in the jpeg format, with the proper extension
