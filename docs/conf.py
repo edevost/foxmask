@@ -36,6 +36,7 @@ import foxmask
 extensions = [
     'sphinx.ext.autodoc',
     'sphinxcontrib.napoleon',
+    'sphinx.ext.todo',
     #'sphinx.ext.doctest',
     #'sphinx.ext.todo',
     #'sphinx.ext.coverage',

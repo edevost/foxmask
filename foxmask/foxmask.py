@@ -9,7 +9,7 @@ line, from the root of the FoxMask repository.
 
 .. code-block:: console
     
-  $ foxmask --srcdir images --resultsdir .
+  $ foxmask [srcdir] [resulstdir] .
 
 
 The following module level attributes are passed
@@ -17,14 +17,12 @@ via the command line interface.
 
 Attributes:
     srcdir (str): The directory containing folders (one or many) with images 
-        to analyze. The default value is set to **images**.
+        to analyze.
 
     resultsdir (str): The location where to create the **FoxMaskResults**
-        directory. The default value is set to the actual 
-        directory where the ``foxmask`` command is launched.
+        directory. 
 
-
-The ultimate output of this module is a ``Results``
+The ultimate output of this module is a ``FoxMaskResults``
 directory, under which resulting masks are copied, as
 well as images containing moving objects (as the result
 of the analysis). Tables are also written, one table for
@@ -60,7 +58,7 @@ def getfolders(srcdir):
         srcdir (str): Top level folder containing all folders to analyze.
     
     Returns:
-        list: Folders to analyze.
+        list: folderslist. Folders to analyze.
     """
     if not os.path.exists(srcdir):
         print(srcdir,
@@ -96,8 +94,6 @@ class Getimagesinfos:
 
     """Build data structure of images to be analyzed.
 
-    Images to be analyzed have the following attributes:
-
     """
 
     def __init__(self, folder):
@@ -118,7 +114,7 @@ class Getimagesinfos:
         Generate a list of all images under `folder`
 
         Returns:
-           list: All images under the folder being analyzed.
+           list: imglist. All images under the folder being analyzed.
 
         """
         imglist = []
@@ -144,7 +140,7 @@ class Getimagesinfos:
         >>> datetime.datetime(2014, 8, 6, 16, 5, 55)
 
         Returns:
-           list: Datetime objects representing the exact
+           list: timeofcreation. Datetime objects representing the exact
            time of creation of each image.
 
         """
@@ -194,7 +190,7 @@ class Getimagesinfos:
                 time of creation of each image.
 
         Returns:
-            list: Sorted time of creation of all images to analyze.
+            list: sortedimglist. Sorted time of creation of all images to analyze.
 
         """
         sortedimglist = [x for (y,x) in sorted(zip(self.timeofcreation,
@@ -212,12 +208,12 @@ class Getimagesinfos:
         each shot.
 
         Args:
-            maxgap (int): An int representing the maximum gap
-                in seconds for two consecutive images to be considered as
+            maxgap (int): This represent the maximum gap,
+                , in seconds for two consecutive images to be considered as
                 being part of the same group.
         
         Returns:
-            list: Number of images in each group.
+            list: impg. Number of images in each group.
         """
         impg = []
         res  = []
@@ -239,23 +235,57 @@ class Getimagesinfos:
 
 
 class Imagesanalysis(Getimagesinfos):
-    """Performs the image analysis.
+    """Analyze images to detect moving objects.
 
-    This class constitue the core code of
-    the image analysis. It uses external
-    cpp libraries coded by... citation...
+    Parent: 
+        Getimagesinfos
 
     """
 
     def bgfgestimation(self, sortedimglist, impg, srcdir):
-        """Estimate background model and perform
-        foreground segmentation.
+        """Estimate background model and perform foreground segmentation.
+        
+        The method will iterate over each item of the ``impg`` list, and
+        performs the analysis on each groups. The `trcd` value, which
+        is influencing significantly the outcome of the analysis, is pass
+        to the ``ForegroundSegmentation`` code. To pass this value to
+        the cpp code, it is written to a file `/tmp/params.txt` which is
+        then read by the cpp code at runtime.
 
-        .. note::
-            For performances reasons, the images have been reduced
-            by a factor of 1/3 (0.3). (Link to code).
+        Images to analyze are resized (for performances issues on non server
+        grade hardware) and then saved to a temporary directory that is
+        deleted after each run. The results of this method are black and white
+        masks that are written to disks in ``srcdir/MasksResults``.
 
-         """
+        .. Note::
+
+            This code will only run successfully if the input images
+            are named as the following: ``whatever-name_[4 digits].jpg``.
+            It is a requirement of the ``ForegroundSegmentation`` code.
+            We do not think that FoxMask should handle the naming of
+            the images to be analyzed. This should be done beforehand, by
+            a preprocessing task.
+        
+        * `trcd` : Threshold for cosine distance. This value is fed to
+          the ForegroundSegmentation code. It is a static value, but it could
+          be made more dynamic using, for example, the average light in the
+          image, as shown in the code below:
+
+        .. code-block:: python
+
+            if avgB[0] < 100.0:
+                print 'Low light', avgB
+                tfcd.write(str(0.001))
+            else:
+                print 'High light', avgB
+                tfcd.write(str(0.005))
+        
+
+        Args:
+            sortedimglist (list): The images to be analyzed
+            impg (list): Groups of images on which to run the analysis.
+            scrdir (string): The top level directory of the analysis.
+          """
         tempdir = srcdir + '/temp1'
 
         for sequence in range(len(impg)):
@@ -271,13 +301,13 @@ class Imagesanalysis(Getimagesinfos):
                 imggray1 = cv2.cvtColor(currentFrame.copy(), cv2.COLOR_BGR2GRAY)
                 imggray2 = imggray1[120:-10, 1:-10]
                 avgB = cv2.mean(imggray2)
-                outf = open('/tmp/params.txt', 'w')
+                tfcd = open('/tmp/params.txt', 'w')
                 if avgB[0] < 100.0:
                     print 'Low light', avgB
-                    outf.write(str(0.001))
+                    tfcd.write(str(0.001))
                 else:
                     print 'High light', avgB
-                    outf.write(str(0.001))
+                    tfcd.write(str(0.001))
                 resizimg1 = cv2.resize(currentFrame, (0, 0), fx=0.3, fy=0.3)
                 print "images", image
                 formatedname = os.path.join(tempdir, os.path.basename(
@@ -296,8 +326,18 @@ class Imagesanalysis(Getimagesinfos):
             shutil.rmtree(tempdir)
 
     def masks_analysis(self, sortedimglist):
-        """Masks analysis to detect moving objects large
-        enough to be considered as animals.
+        """Analyze masks to detect moving objects
+
+        This method will analyze created masks, taking
+        the masks list to analyze from 
+        :func:`foxmask.Imagesanalysis.getmaskslist`. The
+        area of all white objects in each masks are
+        calculated. If the area is smaller than ``parameters.minsize``,
+        the object is not considered as an animal.
+
+        Returns:
+            list: resultslist. Results of the masks analysis.
+
         """
         resultslist = []
         for i in range(len(self.maskslist)):
@@ -334,8 +374,22 @@ class Imagesanalysis(Getimagesinfos):
         return resultslist
 
     def getmaskslist(self, srcdir):
-        """
-        Create a sorted list of generated masks.
+        """Create a sorted list of generated masks.
+
+        This method will create a list of all the images
+        present in ``srcdir/MasksResults``. 
+        Theses images are the black and white masks created by the
+        :func:`foxmask.Imagesanalysis.bgfgestimation` method.
+        Before creating the list, masks with the prefix ``EstBG``
+        are removed.
+
+        Args:
+            srcdir (str): Top level directory containing
+                directories of images.
+
+        Returns:
+            list: maskslist. All masks to analyse.
+        
         """
         resmasks = srcdir + '/MasksResults'
         todelete = glob.glob(resmasks + '/EstBG*')
@@ -348,6 +402,14 @@ class Imagesanalysis(Getimagesinfos):
 
     def writeresults(self, item, resultsdir):
         """Write results of the mask analysis to file
+
+        Args:
+            item (str): The name of the class analyzed, representing
+                the name of the folder analyzed. This is used to
+                name the table in which the results will be written.
+
+            resultsdir (str): The top directory where to write
+                the final results.
         """
         tablename = os.path.basename(item) + '.csv'
         tablepath = resultsdir + '/FoxMaskResults/tables/' + tablename
