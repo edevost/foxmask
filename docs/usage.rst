@@ -6,9 +6,9 @@ Usage
 
 FoxMask program is shipped with a sample of images located in the
 ``images`` directory, where you will find two other directories (example-1
-and example-2) containing jpeg images of Arctic fox. We encourage you to test
+and example-2) containing JPEG images of Arctic fox. We encourage you to test
 FoxMask on theses samples first. The full analysis takes around 2 minutes on
-an intel core i5.
+an Intel core i5.
 
 To run FoxMask, simply invoke it from the command line.
 
@@ -22,7 +22,7 @@ To run FoxMask, simply invoke it from the command line.
 Without argument, the software will exit and print it's usage and
 what argument is missing. The first argument [SRCDIR] is
 the directory where all your directories containing images are.
-The second argument [RESULTDIR] is the directory where you want the
+The second argument [RESULTSDIR] is the directory where you want the
 results to be created. For example:
 
 .. code-block:: console
@@ -39,33 +39,31 @@ set of images distributed with FoxMask and write it's results in
 As the code run, you will see images being analyzed and mask created. At the end of
 the process, a CSV file is exported with the image names and the presence
 of detected objects (0 or 1). If required, masks and images with detected
-objects are also copied in subdirectorys.
+objects are also copied in sub directories.
 
 
 Running the code on your own set
 ================================
 
 To run the code on your own set of images, simply specify
-where the directorys containing the images are located. For
+where the directory containing the images are located. For
 example:
 
 .. code-block:: console
 
    foxmask /media/reconyximages/2015  analysis/results
 
-This will launch the analysis on all directorys present in
+This will launch the analysis on all directories present in
 ``/media/reconyximages/2015``. There is no limits in the
-number of directorys that can be analyzed. Just keep in mind
-that the more directorys, the more the analysis will take time.
+number of directory's that can be analyzed. Just keep in mind
+that the more directories, the more the analysis will take time.
 We suggest testing the software on just one directory to see
-how it behaves on your images, and learn it's functioning.
-
-The results will be written in the ``analysis/results``
-directory
+how it behaves on your images, and learn how FoxMask is functioning.
+The results will be written in the ``analysis/results`` directory.
 
 .. note::
 
-   You do not need to be in the ``foxmask`` directory to run the command.
+   You do not need to be in the ``foxmask`` directory to run FoxMask.
    Just make sure to specify to path to your images directory relative
    to where you are launching the foxmask command, or specify an
    absolute path as in the example above. The same applies for where
@@ -75,19 +73,27 @@ directory
 Constraints
 -----------
 
-The are a few minor constraints concerning the directorys structure containing the
+The are a few minor constraints concerning the directory structure containing the
 images to be analyzed and the format of the images.
 
-Directorys naming and structure
-  All directorys to be analyzed should have a descriptive name, as FoxMask
-  will store the results using the names of these directorys. Also,
-  every directory should contains images and **no** sub directorys.
+Directories naming and structure
+  All directories to be analyzed should have a descriptive name, as FoxMask
+  will store the results using the names of these directories. Also,
+  every directory should contains images and **no** sub directory.
 
 Images naming and format
-  Your images should be in the jpeg format, with the proper extension
-  (e.g. image-01.jpg, or image-01.jpeg). The case does not matter, as well
-  as the name of the image. A future version of foxmask will be able to analyze
-  other image format. See `issue number 45`_
+  Your images should be in the JPEG format, with the proper extension
+  (e.g. image_0001.jpg, or image_0002.JPG). The numbering is crucial:
+  it is mandatory to use a 4 digit number prefixed by an underscore.
+  The case does not matter, as well as the name of the image.
+  A future version of foxmask will be able to analyze other image format.
+  See `issue number 45`_
+
+  .. note::
+
+     We believe that it is the user's responsibility to format their images
+     in an uniform way before feeding them to an analysis software.
+
 
 .. _issue number 45: https://github.com/edevost/foxmask/issues/45
 

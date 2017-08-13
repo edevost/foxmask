@@ -4,13 +4,7 @@
 
 The main routine of the code will iterate through every folders present 
 in the **images** directory and analyze found images, looking
-for moving objects. To run ``FoxMask``, simply invoke it from the command
-line, from the root of the FoxMask repository.
-
-.. code-block:: console
-    
-  $ foxmask [srcdir] [resulstdir] .
-
+for moving objects.
 
 The following module level attributes are passed
 via the command line interface.
@@ -21,15 +15,6 @@ Attributes:
 
     resultsdir (str): The location where to create the **FoxMaskResults**
         directory. 
-
-The ultimate output of this module is a ``FoxMaskResults``
-directory, under which resulting masks are copied, as
-well as images containing moving objects (as the result
-of the analysis). Tables are also written, one table for
-each directory analyzed. Each table contains the name
-of the image, the result (0 or 1) of detection and parameters
-used during the analysis.
-
 """
 
 import csv
@@ -50,7 +35,7 @@ def getfolders(srcdir):
     """Get the list of all folders in **srcdir**
 
     FoxMask needs a list of folders containing images to analyze.
-    Each folder must strictly contain a set of images. No subfolders
+    Each folder must strictly contain a set of images. No sub folders
     are allowed. Code will gracefully exit if the **srcdir** argument
     does not exist.
 
@@ -264,7 +249,7 @@ class Imagesanalysis(Getimagesinfos):
             It is a requirement of the ``ForegroundSegmentation`` code.
             We do not think that FoxMask should handle the naming of
             the images to be analyzed. This should be done beforehand, by
-            a preprocessing task.
+            a prepossessing task.
         
         * `trcd` : Threshold for cosine distance. This value is fed to
           the ForegroundSegmentation code. It is a static value, but it could
@@ -341,7 +326,7 @@ class Imagesanalysis(Getimagesinfos):
         """
         resultslist = []
         for i in range(len(self.maskslist)):
-            print "Analysing", self.maskslist[i]
+            print "Analyzing", self.maskslist[i]
             currentMask1 = cv2.imread(self.maskslist[i])
             currentMask2 = currentMask1[100:-20, 1:-10]
             opened = cv2.morphologyEx(currentMask2,
@@ -388,7 +373,7 @@ class Imagesanalysis(Getimagesinfos):
                 directories of images.
 
         Returns:
-            list: maskslist. All masks to analyse.
+            list: maskslist. All masks to analyze.
         
         """
         resmasks = srcdir + '/MasksResults'
