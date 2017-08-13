@@ -1,5 +1,7 @@
 import click
-from foxmask import foxmask
+import sys
+sys.path.insert(0, 'foxmask')
+import foxmask
 import os
 import shutil
 
