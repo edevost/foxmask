@@ -27,22 +27,22 @@ InputPreprocessor::InputPreprocessor(const rowvec &cur_param_vec,
 	ratio = down_scale_ratio;
 	in_data_format = type_unknown;
 	initialise_algorithm_parameters(cur_param_vec);
-
+        #ifdef ENABLEGUI
 	cvNamedWindow("mainWin1", CV_WINDOW_AUTOSIZE);
 	//cvMoveWindow("mainWin1", 600, 40);
 	cvNamedWindow("mainWin2", CV_WINDOW_AUTOSIZE);
 	//cvMoveWindow("mainWin2", 1000, 40);
-
+        #endif
 }
 
 InputPreprocessor::~InputPreprocessor()
 {
 	cout << "exit successfully" << endl;
 
-
+        #ifdef ENABLEGUI
 	cvDestroyWindow("mainWin1");
 	cvDestroyWindow("mainWin2");
-
+        #endif
 }
 
 void InputPreprocessor::initialise_algorithm_parameters(

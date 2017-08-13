@@ -951,9 +951,11 @@ template<typename eT> void CascadedBgs<eT>::trace_blocks(
 	IplImage *temp = cvCloneImage((const IplImage*) frame);
 	cvRectangle(temp, cvPoint(j, i), cvPoint(j + cascadedBgsParams->N, i
 			+ cascadedBgsParams->N), cvScalar(0, 0, 255), 1, 8, 0);
+        #ifdef ENABLEGUI
 	cvShowImage("mainWin1", temp);
 	cvWaitKey(10);
 	cvReleaseImage(&temp);
+        #endif
 		}
 //	 FOR DEBUGGING PURPOSE ONLY+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
