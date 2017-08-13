@@ -1,7 +1,8 @@
 import click
-import foxmask
+from foxmask import foxmask
 import os
 import shutil
+
 
 """Entry point of the foxmask software
 
@@ -44,7 +45,7 @@ def main(srcdir, resultsdir):
         imageanalysis = foxmask.Imagesanalysis(classdict[item])
         imageanalysis.bgfgestimation(sortedimglist, impg, srcdir)
         imageanalysis.getmaskslist(srcdir)
-        imageanalysis.masks_analysis(sortedimglist)
+        imageanalysis.masks_analysis()
         shutil.rmtree(srcdir + '/MasksResults')
         imageanalysis.writeresults(item, resultsdir)
 

@@ -310,7 +310,7 @@ class Imagesanalysis(Getimagesinfos):
             os.system(cppfg)
             shutil.rmtree(tempdir)
 
-    def masks_analysis(self, sortedimglist):
+    def masks_analysis(self):
         """Analyze masks to detect moving objects
 
         This method will analyze created masks, taking
