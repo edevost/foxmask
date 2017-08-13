@@ -312,7 +312,7 @@ def get_distribution_info():
         ],
         entry_points='''
         [console_scripts]
-        foxmask=foxmask.__main__:main
+        foxmask=cli.cli:main
      ''',
     )
 
