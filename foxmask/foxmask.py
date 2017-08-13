@@ -52,7 +52,6 @@ def getfolders(srcdir):
 
     folderslist = os.walk(srcdir).next()[1]
     folderslist = [srcdir + '/' + s for s in folderslist]
-    if "images/MasksResults" in folderslist: folderslist.remove("images/MasksResults")
     print folderslist
     return folderslist
 
