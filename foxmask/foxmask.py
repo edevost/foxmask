@@ -287,12 +287,7 @@ class Imagesanalysis(Getimagesinfos):
                 imggray2 = imggray1[120:-10, 1:-10]
                 avgB = cv2.mean(imggray2)
                 tfcd = open('/tmp/params.txt', 'w')
-                if avgB[0] < 100.0:
-                    print 'Low light', avgB
-                    tfcd.write(str(0.001))
-                else:
-                    print 'High light', avgB
-                    tfcd.write(str(0.001))
+                tfcd.write(str(0.001))
                 resizimg1 = cv2.resize(currentFrame, (0, 0), fx=0.3, fy=0.3)
                 print "images", image
                 formatedname = os.path.join(tempdir, os.path.basename(
