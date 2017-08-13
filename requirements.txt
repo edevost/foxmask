@@ -14,4 +14,3 @@ opencv-python
 -e git://github.com/smarnach/pyexiftool.git#egg=pyexiftool
 click
 sphinxcontrib-napoleon
-.
