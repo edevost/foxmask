@@ -19,8 +19,10 @@ import os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('../foxmask'))
+sys.path.insert(0, os.path.abspath('../cli'))
 
 import foxmask
+import cli
 #from setup import get_distribution_info
 
 #project_metadata = get_distribution_info()

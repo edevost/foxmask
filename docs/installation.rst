@@ -30,11 +30,11 @@ that you will need to have ``sudo`` rights.
 
 .. code-block:: console
 
-   $ sh install-ubuntu16.sh
+   $ sh install-Ubuntu16.sh
 
 .. note::
    You can issue the install command from any directory, the
-   script will download all the needed softwares in your home
+   script will download all the needed software in your home
    directory. Please do **not** run the script prefixed by sudo.
 
 Once the installation if finished, you will have a ``foxmask`` directory
@@ -44,7 +44,7 @@ on your Linux Box ! Consult our :ref:`usage` page to get
 started.
 
 This installation have been successfully tested on Ubuntu 16.04, on bare
-metal computers as well as on GCE (Google Cloud Engine) and VirtualBox 5.0.
+metal computers as well as on GCE (Google Cloud Engine) and Virtual-Box 5.0.
 
 .. _installation through a virtual machine:
 
@@ -56,11 +56,11 @@ Installation through a virtual machine
 
 We provide a complete virtual environment to run and
 use FoxMask. The main advantages of this installation
-is that you can rapidly get FoxMask running on any platform. However, 
+is that you can rapidly get FoxMask running on any platform. However,
 there are important drawbacks to consider:
 
 * Poor performances compared to standalone installation
-* A bit heavy to manage (Vagrant + VirtualBox + share usb)
+* A bit heavy to manage (Vagrant + Virtual-Box + share USB)
 
 Despite theses drawbacks, we consider that using
 our FoxMask box can be very useful for first time users
@@ -74,22 +74,22 @@ wanting to test the software, or for development purposes.
    FoxMask should consider installing it on bare metal hardware running
    a Linux OS, or on a virtual infrastructure running *libvirt*. We provide
    a fully automated installation script, successfully
-   tested on *Ubuntu 16.04*. Please see :ref:`standalone installation on linux`
+   tested on *Ubuntu 16.04*. Please see :ref:`standalone installation on Linux`
    to install FoxMask on you Linux machine.
 
 To run the FoxMask virtual machine on your Linux, Mac or Windows computer,
-you will need the following three open source softwares:
+you will need the following three open source software:
 
-* `VirtualBox`_
+* `Virtual-Box`_
 * `Vagrant`_
 * `Git`_
 
-.. _virtualbox: https://www.virtualbox.org/
+.. _virtual-box: https://www.virtualbox.org/
 .. _vagrant: https://www.vagrantup.com/
 .. _git: https://git-scm.com/
 
 Follow the installation procedure for your platform.
-Once theses softwares are installed, you are ready
+Once theses software are installed, you are ready
 to install FoxMask by issuing the following command:
 
 
@@ -108,7 +108,7 @@ start the virtual machine by issuing the following commands:
    vagrant up
 
 This will boot the virtual machine. You can also manage you
-virtual machine through VirtualBox software, and start or
+virtual machine through Virtual-Box software, and start or
 stop your machine from there. The start process will bring you to
 the Ubuntu desktop. The default user and password on this
 virtual environment is vagrant vagrant. Once the machine is ready, you can
@@ -120,7 +120,7 @@ Testing on your own set of images
 
 To test FoxMask on your own set of images, you will have to make your
 images available to the virtual machine. To do so, we recommend saving
-your image set on an usb drive, and make the drive available to VirtualBox.
+your image set on an USB drive, and make the drive available to Virtual-Box.
 There are many good tutorials on the web explaining the process:
 
 * http://www.dedoimedo.com/computers/virtualbox-usb.html
@@ -129,19 +129,19 @@ There are many good tutorials on the web explaining the process:
 
 Making this work will demand a bit of work and reading, but nothing out of
 reach of any computer users with minimal computer knowledge. The main steps
-to get your FoxMask virtual machine to have access to an usb drive plugged
+to get your FoxMask virtual machine to have access to an USB drive plugged
 on your host computer are the following:
 
 * Shutdown your FoxMask virtual machine if it is running
-* Plug your usb drive on your computer (host)
+* Plug your USB drive on your computer (host)
 * Install `Virtual Box 5.0`_ extension pack
-* Activate usb controller on VirtualBox
+* Activate USB controller on Virtual-Box
 * Add your drive
 
 Once your drive is added, boot your FoxMask virtual machine
 and check if there is a link to your drive on the desktop.
 If everything went well, you will have direct access to your
-usb drive on your virtual machine ! You can then proceed to our
+USB drive on your virtual machine ! You can then proceed to our
 :ref:`usage` section to start using FoxMask on your set of images.
 
 .. _virtual box 5.0: https://www.virtualbox.org/wiki/Download_Old_Builds_5_0

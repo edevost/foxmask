@@ -3,6 +3,13 @@ import foxmask
 import os
 import shutil
 
+"""Entry point of the foxmask software
+
+It uses the python package `click`_ to provide
+users with a command line interface (cli).
+
+.. _click: http://click.pocoo.org/5/
+"""
 
 @click.command()
 @click.argument('srcdir', nargs=1, type=click.Path(
@@ -12,6 +19,12 @@ import shutil
 
 def main(srcdir, resultsdir):
     """Exectution of the foxmask module.
+
+    Args:
+        srcdir (str): Top level directory where the module can find
+            images to analyze.
+        resultsdir (str): Top level directory where to store the results
+            of the analysis.
     """
     if os.path.exists(resultsdir + '/FoxMaskResults'):
         click.confirm(resultsdir + '/FoxMaskResults directory exist Do you want to '

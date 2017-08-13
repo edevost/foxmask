@@ -3,6 +3,7 @@ FoxMask module
 ==============
 
 .. automodule:: foxmask
+   :members:
 
 Gathering folders to analyze
 ============================

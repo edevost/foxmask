@@ -26,3 +26,4 @@ Getting Started
    usage
    contribution
    code
+   cli
