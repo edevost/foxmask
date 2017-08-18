@@ -15,7 +15,7 @@ before_install:
 - popd
 install:
   - "pip install -r requirements.txt"
-  - "pip install ."
+  - "pip install --editable ."
 
 script:
   - python ./tests/test.py
