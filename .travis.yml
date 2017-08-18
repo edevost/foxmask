@@ -7,5 +7,8 @@ before_install:
 - sudo apt-get install -qq libblas-dev liblapack-dev libsuperlu3-dev libarpack2 libarpack2-dev libopencv-dev libimage-exiftool-perl libarmadillo-dev python-opencv libopencv-dev
 - cd cpplibs/background_estimation_code/code/
 - g++ -std=c++11 -L/usr/lib -L/usr/local/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
+- sudo cp EstimateBackground /usr/local/bin
+- cd ../../../
+- pwd
 script:
   - python ./tests/test.py
