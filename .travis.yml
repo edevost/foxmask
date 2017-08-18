@@ -1,6 +1,6 @@
 language: python
-  sudo: enabled
-  dist: trusty
+sudo: enabled
+dist: trusty
 
   before_install:
 - sudo apt-get update -qq
