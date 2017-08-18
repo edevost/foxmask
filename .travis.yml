@@ -13,5 +13,9 @@ before_install:
 - g++ -o ForegroundSegmentation main.cpp input_preprocessor.cpp -O2 -fopenmp -I/usr/include/opencv -L/usr/lib64  -L/usr/lib -L/usr/local/lib -larmadillo -lopencv_core -lopencv_highgui -lopencv_imgproc
 - sudo cp ForegroundSegmentation /usr/local/bin
 - popd
+install:
+  - "pip install -r requirements.txt"
+  - "pip install ."
+
 script:
   - python ./tests/test.py
