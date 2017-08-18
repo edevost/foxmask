@@ -1,0 +1,7 @@
+language: python
+  sudo: enabled
+  dist: trusty
+
+  before_install:
+- sudo apt-get update -qq
+- sudo apt-get install -qq libblas-dev liblapack-dev libsuperlu-dev libarpack2 libarpack2-dev libopencv-dev libimage-exiftool-perl libarmadillo6 libarmadillo-dev python-opencv libopencv-dev
