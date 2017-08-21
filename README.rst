@@ -2,6 +2,9 @@
 FoxMask
 =======
 
+.. image:: https://travis-ci.org/edevost/foxmask.svg?branch=master
+    :target: https://travis-ci.org/edevost/foxmask
+
 This project is intended to be used by ecology
 researchers wishing to implement an automated workflow
 of image analysis. It is in early stage of development
