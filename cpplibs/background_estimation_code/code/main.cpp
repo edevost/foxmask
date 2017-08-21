@@ -153,11 +153,12 @@ int main(int argc, char **argv)
 	int channels = img.channels();
 	cv::Mat input_img_mtx;
 
+        #ifdef ENABLEGUI 
 	cvNamedWindow("mainWin1", CV_WINDOW_NORMAL);
 	//cvMoveWindow("mainWin1", 400, 40);
 	cvNamedWindow("mainWin2", CV_WINDOW_NORMAL);
 	//cvMoveWindow("mainWin2", 900, 40);
-
+        #endif
 
 	ltemp = atoi(frno.c_str());
 	numtostr(ltemp, lbuffer);
@@ -172,9 +173,11 @@ int main(int argc, char **argv)
 		input_img_mtx = cv::imread(tmp_path.c_str(), same_as_src_flg);
 
 		Obj.detectRaw(input_img_mtx);
+                #ifdef ENABLEGUI
 		cv::imshow("mainWin1",input_img_mtx);
 		cv::imshow("mainWin2", Obj.estimated_bg_frame);
 		cvWaitKey(2);
+                #endif
 
 	}
 	vector<int> params;
@@ -205,9 +208,10 @@ int main(int argc, char **argv)
 	cout << endl << "Background estimation is complete" << endl;
 	cout << "+++++++++++++++++++++++++++++++++++++" << endl;
 
+        #ifdef ENABLEGUI
 	cvDestroyWindow("mainWin1");
 	cvDestroyWindow("mainWin2");
-
+        #endif
 
 
 	cout << "exit successfully" << endl;

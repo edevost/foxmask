@@ -33,8 +33,12 @@ sudo apt-get -y install libarmadillo6 libarmadillo-dev
 # Open CV
 sudo apt-get -y install python-opencv libopencv-dev
 
-# FoxMask
+# FoxMask cpp libraries
 cd ~/foxmask/cpplibs/background_estimation_code/code/
+
+# If on google cloud, use the cpplibs
+# without gui.
+if curl metadata.google.internal -i ; then
 
 g++ -std=c++11 -L/usr/lib -L/usr/local/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
 
@@ -46,21 +50,21 @@ g++ -std=c++11 -o ForegroundSegmentation main.cpp input_preprocessor.cpp -O2 -fo
 
 sudo cp ForegroundSegmentation /usr/local/bin
 
+else
+    
+g++ -std=c++11 -DENABLEGUI -L/usr/lib -L/usr/local/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
 
+sudo cp EstimateBackground /usr/local/bin
+
+cd ~/foxmask/cpplibs/foreground_detection_code/code/
+
+g++ -std=c++11 -DENABLEGUI -o ForegroundSegmentation main.cpp input_preprocessor.cpp -O2 -fopenmp -I/usr/include/opencv -L/usr/lib64  -L/usr/lib -L/usr/local/lib -larmadillo -lopencv_core -lopencv_highgui -lopencv_imgproc
+
+sudo cp ForegroundSegmentation /usr/local/bin
+fi
+
+# Install foxmask requirements
 cd ~/foxmask
 sudo pip install -r requirements.txt
+# Install foxmask
 sudo pip install .
-sudo cp vagrant/Fox1.jpg /usr/share/backgrounds/xfce/
-cd ~/
-# If on google cloud, use the cpplibs
-# without gui.
-if curl metadata.google.internal -i ; then
-
-    git clone https://github.com/edevost/foxmask-cpplibs-headless.git
-    cd foxmask-cpplibs-headless/image-segmentation-code/background_estimation_code/code/
-    g++ -L/usr/lib -L/usr/local/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
-    sudo cp EstimateBackground /usr/local/bin
-    cd ~/foxmask-cpplibs-headless/image-segmentation-code/foreground_detection_code/code/
-    g++ -o ForegroundSegmentation main.cpp input_preprocessor.cpp -O2 -fopenmp -I/usr/include/opencv -L/usr/lib64  -L/usr/lib -L/usr/local/lib -larmadillo -lopencv_core -lopencv_highgui -lopencv_imgproc
-    sudo cp ForegroundSegmentation /usr/local/bin
-fi

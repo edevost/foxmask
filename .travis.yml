@@ -1,0 +1,23 @@
+language: python
+sudo: enabled
+dist: trusty
+
+before_install:
+- sudo apt-get update -qq
+- sudo apt-get install -qq libblas-dev liblapack-dev libsuperlu3-dev libarpack2 libarpack2-dev libopencv-dev libimage-exiftool-perl libarmadillo-dev python-opencv libopencv-dev
+- pushd cpplibs/background_estimation_code/code/
+- g++ -std=c++11 -L/usr/lib -L/usr/local/lib -I/usr/include -I/usr/include/opencv main.cpp SequentialBge.cpp SequentialBgeParams.cpp -O3 -larmadillo -lopencv_core -lopencv_highgui -fopenmp -o "EstimateBackground"
+- sudo cp EstimateBackground /usr/local/bin
+- popd
+- pushd cpplibs/foreground_detection_code/code/
+- g++ -o ForegroundSegmentation main.cpp input_preprocessor.cpp -O2 -fopenmp -I/usr/include/opencv -L/usr/lib64  -L/usr/lib -L/usr/local/lib -larmadillo -lopencv_core -lopencv_highgui -lopencv_imgproc
+- sudo cp ForegroundSegmentation /usr/local/bin
+- popd
+install:
+  - "pip install -r requirements.txt"
+  - "pip install --editable ."
+
+script:
+  - python ./tests/test.py
+  - foxmask images .
+  - sh ./tests/results.sh

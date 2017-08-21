@@ -4,6 +4,8 @@
 Welcome to FoxMask's documentation
 ==================================
 
+.. image:: https://travis-ci.org/edevost/foxmask.svg?branch=master
+    :target: https://travis-ci.org/edevost/foxmask
 
 You will find on theses pages information related
 to the installation and usage of FoxMask. It is
