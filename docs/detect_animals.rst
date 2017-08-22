@@ -1,5 +1,5 @@
 ==============
-FoxMask module
+Detect_animals
 ==============
 
 .. automodule:: detect_animals

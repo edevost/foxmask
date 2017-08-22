@@ -1,6 +1,6 @@
-==========
-Cli module
-==========
+===
+Cli
+===
 
 This module is the entry point of the
 FoxMask package. When ``foxmask`` is invoke
