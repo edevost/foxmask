@@ -3,7 +3,7 @@
 """Evaluate if an image contains moving objects (animals).
 
 The main routine of the code will iterate through every folders present 
-in the **images** directory and analyze found images, looking
+in the [SRCDIR] directory and analyze found images, ultimately looking
 for moving objects.
 
 The following module level attributes are passed
@@ -76,7 +76,7 @@ def makeresultsfolder(resultsdir):
 
 class Getimagesinfos:
 
-    """Build data structure of images to be analyzed.
+    """Get all images to be analyzed and their metadata
 
     """
 
