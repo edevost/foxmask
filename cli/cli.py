@@ -1,7 +1,7 @@
 import click
 import sys
 sys.path.insert(0, 'foxmask')
-import foxmask
+import detect_animals
 import os
 import shutil
 
