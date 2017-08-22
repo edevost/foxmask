@@ -19,5 +19,5 @@ install:
 
 script:
   - python ./tests/test.py
-  - foxmask images .
+  - foxmask detect images .
   - sh ./tests/results.sh

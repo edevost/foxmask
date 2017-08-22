@@ -20,31 +20,29 @@ Standalone installation on Linux
 This method will install FoxMask on your Linux computer. We provide an
 automated install script, which will take care of installing all the
 dependencies needed to run FoxMask as well as the software itself. It is
-made for **Ubuntu 16.04**. The file is located in
+made for **Ubuntu 16.04**. The installation script is located in
 ``install-scripts/install-ubuntu16.sh`` of the FoxMask repository.
-You can also download the file directly
-:download:`sh <../install-scripts/install-ubuntu16.sh>` an run it.
-To execute the script, simply run the following command as a standard user. Note
-that you will need to have ``sudo`` rights.
+To execute the script, simply clone the repository and execute the install
+script as a regular user. Note that you will need to have ``sudo`` rights.
 
 
 .. code-block:: console
 
+   $ git clone https://github.com/edevost/foxmask.git
+   $ cd foxmask
    $ sh install-Ubuntu16.sh
 
-.. note::
-   You can issue the install command from any directory, the
-   script will download all the needed software in your home
-   directory. Please do **not** run the script prefixed by sudo.
-
-Once the installation if finished, you will have a ``foxmask`` directory
-in your home folder where you will find the software and a set of images
-to test the software. Congratulation, you are now ready to start using FoxMask
+Congratulation, you are now ready to start using FoxMask
 on your Linux Box ! Consult our :ref:`usage` page to get
 started.
 
-This installation have been successfully tested on Ubuntu 16.04, on bare
-metal computers as well as on GCE (Google Cloud Engine) and Virtual-Box 5.0.
+
+.. note::
+
+   This installation script have been successfully tested on Ubuntu 16.04, on bare
+   metal computers as well as on GCE (Google Cloud Engine) and Virtual-Box 5.0.
+   Successful installation have also been performed on Debian Stretch and
+   Ubuntu 14.04 container (TravisCI).
 
 .. _installation through a virtual machine:
 

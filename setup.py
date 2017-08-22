@@ -283,7 +283,7 @@ class Clean(Command):
 def get_distribution_info():
     return dict(
         name='foxmask',
-        packages=['foxmask'],
+        packages=['detect_animals'],
         version='2.1',
         description='Python package to analyse camera traps images',
         author='Eric Devost',
@@ -312,7 +312,7 @@ def get_distribution_info():
         ],
         entry_points='''
         [console_scripts]
-        foxmask=cli.cli:main
+        foxmask=cli:cli
      ''',
     )
 

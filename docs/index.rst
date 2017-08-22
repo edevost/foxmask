@@ -27,5 +27,11 @@ Getting Started
    installation
    usage
    contribution
-   code
+
+Modules
+=======
+
+.. toctree::
+
    cli
+   detect_animals

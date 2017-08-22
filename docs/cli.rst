@@ -1,6 +1,6 @@
-==========
-Cli module
-==========
+===
+Cli
+===
 
 This module is the entry point of the
 FoxMask package. When ``foxmask`` is invoke
@@ -12,4 +12,4 @@ file, as follows:
    :language: python
    :lines: 313-315
 
-.. autofunction:: cli.main
+.. autofunction:: cli.detect

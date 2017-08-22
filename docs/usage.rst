@@ -15,21 +15,25 @@ To run FoxMask, simply invoke it from the command line.
 .. code-block:: console
 
    $ foxmask
-   Usage: foxmask [OPTIONS] SRCDIR RESULTSDIR
+   Usage: foxmask [OPTIONS] COMMAND [ARGS]...
 
-   Error: Missing argument "srcdir".
+   Options:
+       --help  Show this message and exit.
 
-Without argument, the software will exit and print it's usage and
-what argument is missing. The first argument [SRCDIR] is
-the directory where all your directories containing images are.
-The second argument [RESULTSDIR] is the directory where you want the
-results to be created. For example:
+   Commands:
+       detect  Command to detect animals on images.
+
+Without argument, the software will exit and print it's usage, listing
+the available commands.  The two mandatory arguments for the detect command
+are [SRCDIR], the directory where all your directories containing images
+is, and [RESULTSDIR], the directory where you want the results to be written.
+For example:
 
 .. code-block:: console
 
-   $ foxmask images .
+   $ foxmask detect images .
 
-Will launch the software and run the analysis for all directories
+Will launch the software and run the detect_animals analysis for all directories
 present in the ``images`` directory  and create ``FoxMaskResults`` in your
 current directory (.). If you are launching the application in the foxmask
 directory, the command will launch the analysis process on the default
@@ -51,7 +55,7 @@ example:
 
 .. code-block:: console
 
-   foxmask /media/reconyximages/2015  analysis/results
+   foxmask detect /media/reconyximages/2015  analysis/results
 
 This will launch the analysis on all directories present in
 ``/media/reconyximages/2015``. There is no limits in the

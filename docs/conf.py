@@ -21,7 +21,7 @@ import os
 sys.path.insert(0, os.path.abspath('../foxmask'))
 sys.path.insert(0, os.path.abspath('../cli'))
 
-import foxmask
+import detect_animals
 import cli
 #from setup import get_distribution_info
 

@@ -1,7 +1,7 @@
 import click
 import sys
 sys.path.insert(0, 'foxmask')
-import foxmask
+import detect_animals
 import os
 import shutil
 
@@ -14,14 +14,17 @@ users with a command line interface (cli).
 .. _click: http://click.pocoo.org/5/
 """
 
-@click.command()
+@click.group()
+def cli():
+    pass
+
+@cli.command()
 @click.argument('srcdir', nargs=1, type=click.Path(
     exists=True, dir_okay=True))
 @click.argument('resultsdir', nargs=1, type=click.Path(
     exists=True, dir_okay=True))
-
-def main(srcdir, resultsdir):
-    """Exectution of the foxmask module.
+def detect(srcdir, resultsdir):
+    """Command to detect animals on images.
 
     Args:
         srcdir (str): Top level directory where the module can find
@@ -32,11 +35,11 @@ def main(srcdir, resultsdir):
     if os.path.exists(resultsdir + '/FoxMaskResults'):
         click.confirm(resultsdir + '/FoxMaskResults directory exist Do you want to '
                       'continue and overwrite the results', abort=True)
-    foxmask.makeresultsfolder(resultsdir)
-    folderslist = foxmask.getfolders(srcdir)
+    detect_animals.makeresultsfolder(resultsdir)
+    folderslist = detect_animals.getfolders(srcdir)
     classdict = {}
     for folder in folderslist:
-        classdict[folder] = foxmask.Getimagesinfos(folder)
+        classdict[folder] = detect_animals.Getimagesinfos(folder)
     for item in classdict:
         print item
         classdict[item].getimageslist()
@@ -44,7 +47,7 @@ def main(srcdir, resultsdir):
         sortedimglist = classdict[item].sortimages()
         print "hello", os.path.basename(sortedimglist[0])
         impg = classdict[item].getimpg()
-        imageanalysis = foxmask.Imagesanalysis(classdict[item])
+        imageanalysis = detect_animals.Imagesanalysis(classdict[item])
         imageanalysis.bgfgestimation(sortedimglist, impg, srcdir)
         imageanalysis.getmaskslist(srcdir)
         imageanalysis.masks_analysis()
@@ -53,4 +56,4 @@ def main(srcdir, resultsdir):
 
 
 if __name__ == "__main__":
-    main()
+    cli()
