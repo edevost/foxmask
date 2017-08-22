@@ -93,12 +93,14 @@ to install FoxMask by issuing the following command:
 
 .. code-block:: console
 
-   git clone https://github.com/edevost/foxmask.git
+   $ git clone https://github.com/edevost/foxmask.git
+   $ cd foxmask
+   $ pip install . --user
 
 
 This will fetch all needed components to run the virtual
-machine. Once the clone command is completed, you can
-start the virtual machine by issuing the following commands:
+machine and update to the latest verstion of FoxMask.
+You can then start the virtual machine by issuing the following commands:
 
 .. code-block:: console
 
