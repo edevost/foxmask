@@ -12,4 +12,4 @@ file, as follows:
    :language: python
    :lines: 313-315
 
-.. autofunction:: cli.main
+.. autofunction:: cli.detect

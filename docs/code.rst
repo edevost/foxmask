@@ -2,7 +2,7 @@
 FoxMask module
 ==============
 
-.. automodule:: foxmask
+.. automodule:: detect_animals
    :members:
 
 Gathering folders to analyze
@@ -26,7 +26,7 @@ to analyze images in each found directory. Thus, the
 in a dictionary, one class for each directory being analyzed.
 This class is the parent of :class:`foxmask.Imagesanalysis`
 
-.. autoclass:: foxmask.Getimagesinfos
+.. autoclass:: detect_animals.Getimagesinfos
    :members: __init__, getimageslist, getimagesmeta, sortimages,
              getimpg
 
@@ -54,6 +54,6 @@ training images.
 
 .. _estimatebackground: http://ieeexplore.ieee.org/document/5289348/
 .. _foregroundsegmentation: https://arxiv.org/abs/1303.4160
-.. autoclass:: foxmask.Imagesanalysis
+.. autoclass:: detect_animals.Imagesanalysis
    :members: bgfgestimation, masks_analysis, getmaskslist,
              writeresults
