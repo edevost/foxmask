@@ -26,7 +26,7 @@ To run FoxMask, simply invoke it from the command line.
 Without argument, the software will exit and print it's usage, listing
 the available commands.  The two mandatory arguments for the detect command
 are [SRCDIR], the directory where all your directories containing images
-is, and [RESULTSDIR], the directory where you want the results to be created.
+is, and [RESULTSDIR], the directory where you want the results to be written.
 For example:
 
 .. code-block:: console
