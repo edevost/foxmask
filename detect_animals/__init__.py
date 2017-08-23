@@ -2,7 +2,7 @@
 
 """Evaluate if an image contains moving objects (animals).
 
-The main routine of the code will iterate through every folders present 
+The main routine of the code will iterate through every folders present
 in the [SRCDIR] directory and analyze found images, ultimately looking
 for moving objects.
 
@@ -10,11 +10,11 @@ The following module level attributes are passed
 via the command line interface.
 
 Attributes:
-    srcdir (str): The directory containing folders (one or many) with images 
+    srcdir (str): The directory containing folders (one or many) with images
         to analyze.
 
     resultsdir (str): The location where to create the **FoxMaskResults**
-        directory. 
+        directory.
 """
 
 import csv
@@ -28,8 +28,6 @@ import shutil
 import exiftool
 import parameters
 
-time1 = time.time()
-
 
 def getfolders(srcdir):
     """Get the list of all folders in **srcdir**
@@ -41,7 +39,7 @@ def getfolders(srcdir):
 
     Args:
         srcdir (str): Top level folder containing all folders to analyze.
-    
+ 
     Returns:
         list: folderslist. Folders to analyze.
     """
@@ -52,16 +50,16 @@ def getfolders(srcdir):
 
     folderslist = os.walk(srcdir).next()[1]
     folderslist = [srcdir + '/' + s for s in folderslist]
-    print folderslist
+    print(folderslist)
     return folderslist
 
 
 def makeresultsfolder(resultsdir):
     """Make all needed folders to store the final results.
-    
+ 
     Args:
         resultsdir (str): Top level folder for storing results.
-    
+ 
     Returns:
         None
     """
@@ -105,7 +103,7 @@ class Getimagesinfos:
         imglist1 = glob.glob(self.folder + '/*.JPG')
         imglist2 = glob.glob(self.folder + '/*.jpg')
         imglist = imglist1 + imglist2
-        print 'Done Listing Images...'
+        print('Done Listing Images...')
         self.imglist = imglist
         return imglist
 
@@ -138,28 +136,30 @@ class Getimagesinfos:
                 for y in range(len(metadata)):
                     tag = metadata[y]['EXIF:DateTimeOriginal']
                     tags1.append(datetime.fromtimestamp(time.mktime(
-                        (time.strptime(tag,"%Y:%m:%d %H:%M:%S")))))
+                        (time.strptime(tag, "%Y:%m:%d %H:%M:%S")))))
                 timeofcreation.extend(tags1)
             else:
                 tags1 = []
                 for y in range(len(metadata)):
                     key2 = 'File:Comment'
                     if key2 in metadata[y]:
-                        tag2 = date_reg_expAM.findall(metadata[y]['File:Comment'])
+                        tag2 = date_reg_expAM.findall(
+                            metadata[y]['File:Comment'])
                         if tag2 == []:
-                            tag2 = date_reg_exp.findall(metadata[y]['File:Comment'])
+                            tag2 = date_reg_exp.findall(
+                                metadata[y]['File:Comment'])
                             tag = ''.join(map(str, tag2))
                             tags1.append(datetime.fromtimestamp(time.mktime(
-                                (time.strptime(tag,"%Y-%m-%d %H:%M:%S")))))
+                                (time.strptime(tag, "%Y-%m-%d %H:%M:%S")))))
                         else:
                             tag = ''.join(map(str, tag2))
                             tags1.append(datetime.fromtimestamp(time.mktime(
-                                (time.strptime(tag,"%Y-%m-%d %I:%M:%S %p")))))
+                                (time.strptime(tag, "%Y-%m-%d %I:%M:%S %p")))))
                     else:
                         sys.exit("Unable to read metadata...")
                 timeofcreation.extend(tags1)
 
-        print 'DONE Loading Metadata...'
+        print('DONE Loading Metadata...')
         self.timeofcreation = timeofcreation
         return timeofcreation
 
@@ -174,13 +174,14 @@ class Getimagesinfos:
                 time of creation of each image.
 
         Returns:
-            list: sortedimglist. Sorted time of creation of all images to analyze.
+            list: sortedimglist. Sorted time of creation of all
+                images to analyze.
 
         """
-        sortedimglist = [x for (y,x) in sorted(zip(self.timeofcreation,
-                                                   self.imglist))]
-        sortedtimeofcreation = [x for (y,x) in sorted(zip(self.timeofcreation,
-                                                    self.timeofcreation))]
+        sortedimglist = [x for (y, x) in sorted(zip(self.timeofcreation,
+                                                self.imglist))]
+        sortedtimeofcreation = [x for (y, x) in sorted(zip(self.timeofcreation,
+                                                self.timeofcreation))]
         self.sortedimglist = sortedimglist
         self.sortedtimeofcreation = sortedtimeofcreation
         return sortedimglist
@@ -200,7 +201,7 @@ class Getimagesinfos:
             list: impg. Number of images in each group.
         """
         impg = []
-        res  = []
+        res = []
         for x in self.sortedtimeofcreation:
             diff = int((x - self.sortedtimeofcreation[0]).total_seconds())
             res.append(diff)
@@ -214,7 +215,7 @@ class Getimagesinfos:
         for group in groups:
             impgtemp.append(len(group))
         impg.extend(impgtemp)
-        print 'Done Creating image sequences'
+        print('Done Creating image sequences')
         return impg
 
 
@@ -273,33 +274,35 @@ class Imagesanalysis(Getimagesinfos):
         tempdir = srcdir + '/temp1'
 
         for sequence in range(len(impg)):
-            print "Analyzing sequence ", sequence + 1
-            print impg
-            print "range", range(impg[sequence])
+            print("Analyzing sequence ", sequence + 1)
+            print(impg)
+            print("range", range(impg[sequence]))
             for image in range(impg[sequence]):
 
                 if not os.path.exists(tempdir):
                     os.makedirs(tempdir)
                 currentFrame = cv2.imread(sortedimglist[image + int(
                     sum(impg[0:sequence]))])
-                imggray1 = cv2.cvtColor(currentFrame.copy(), cv2.COLOR_BGR2GRAY)
+                imggray1 = cv2.cvtColor(currentFrame.copy(),
+                                        cv2.COLOR_BGR2GRAY)
                 imggray2 = imggray1[120:-10, 1:-10]
                 avgB = cv2.mean(imggray2)
                 tfcd = open('/tmp/params.txt', 'w')
                 tfcd.write(str(0.001))
                 resizimg1 = cv2.resize(currentFrame, (0, 0), fx=0.3, fy=0.3)
-                print "images", image
+                print("images", image)
                 formatedname = os.path.join(tempdir, os.path.basename(
                     sortedimglist[image + int(
                         sum(impg[0:sequence]))]))
                 formatedname = os.path.splitext(formatedname)[0]+'.jpg'
-                print formatedname
+                print(formatedname)
                 cv2.imwrite(formatedname, resizimg1)
-                print "Saving resized image as", formatedname
+                print("Saving resized image as", formatedname)
             cppcom1 = ["EstimateBackground", tempdir + '/', 'EstBG']
             cppcom = ' '.join(cppcom1)
-            cppcom2 = ["ForegroundSegmentation", tempdir + '/', srcdir + '/MasksResults']
-            cppfg     = ' '.join(cppcom2)
+            cppcom2 = ["ForegroundSegmentation", tempdir + '/',
+                       srcdir + '/MasksResults']
+            cppfg = ' '.join(cppcom2)
             os.system(cppcom)
             os.system(cppfg)
             shutil.rmtree(tempdir)
@@ -308,7 +311,7 @@ class Imagesanalysis(Getimagesinfos):
         """Analyze masks to detect moving objects
 
         This method will analyze created masks, taking
-        the masks list to analyze from 
+        the masks list to analyze from
         :func:`foxmask.Imagesanalysis.getmaskslist`. The
         area of all white objects in each masks are
         calculated. If the area is smaller than ``parameters.minsize``,
@@ -320,17 +323,19 @@ class Imagesanalysis(Getimagesinfos):
         """
         resultslist = []
         for i in range(len(self.maskslist)):
-            print "Analyzing", self.maskslist[i]
+            print("Analyzing", self.maskslist[i])
             currentMask1 = cv2.imread(self.maskslist[i])
             currentMask2 = currentMask1[100:-20, 1:-10]
             opened = cv2.morphologyEx(currentMask2,
                                       cv2.MORPH_OPEN, parameters.kernelO1)
             currentMaskOp1 = cv2.cvtColor(opened, cv2.COLOR_BGR2GRAY)
             currentMaskOp = cv2.morphologyEx(currentMaskOp1,
-                                             cv2.MORPH_CLOSE, parameters.kernel)
+                                             cv2.MORPH_CLOSE,
+                                             parameters.kernel)
             currentMask = cv2.convertScaleAbs(currentMaskOp)
             im2, contoursE, hye = cv2.findContours(currentMask.copy(),
-                                              cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+                                                   cv2.RETR_EXTERNAL,
+                                                   cv2.CHAIN_APPROX_NONE)
             areas = [cv2.contourArea(c) for c in contoursE]
             for k in range(len(parameters.minsize)):
                 if sum(areas) < 1:
@@ -346,8 +351,9 @@ class Imagesanalysis(Getimagesinfos):
                         imgresult = 1
                     else:
                         imgresult = 0
-                resultrow = [self.maskslist[i], imgresult, parameters.minsize[k]]
-                print resultrow
+                resultrow = [self.maskslist[i], imgresult,
+                             parameters.minsize[k]]
+                print(resultrow)
             resultslist.append(resultrow)
         self.resultslist = resultslist
         return resultslist
@@ -356,7 +362,7 @@ class Imagesanalysis(Getimagesinfos):
         """Create a sorted list of generated masks.
 
         This method will create a list of all the images
-        present in ``srcdir/MasksResults``. 
+        present in ``srcdir/MasksResults``.
         Theses images are the black and white masks created by the
         :func:`foxmask.Imagesanalysis.bgfgestimation` method.
         Before creating the list, masks with the prefix ``EstBG``
