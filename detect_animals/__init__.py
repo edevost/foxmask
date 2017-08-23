@@ -27,6 +27,8 @@ from datetime import datetime
 import shutil
 import exiftool
 import parameters
+import logging
+logging.basicConfig(stream=sys.stderr, level=logging.INFO)
 
 
 def getfolders(srcdir):
@@ -50,7 +52,7 @@ def getfolders(srcdir):
 
     folderslist = os.walk(srcdir).next()[1]
     folderslist = [srcdir + '/' + s for s in folderslist]
-    print(folderslist)
+    logging.info('Folders to analyse: %r' % folderslist)
     return folderslist
 
 
@@ -103,7 +105,7 @@ class Getimagesinfos:
         imglist1 = glob.glob(self.folder + '/*.JPG')
         imglist2 = glob.glob(self.folder + '/*.jpg')
         imglist = imglist1 + imglist2
-        print('Done Listing Images...')
+        logging.debug('Done Listing Images...')
         self.imglist = imglist
         return imglist
 
@@ -159,7 +161,7 @@ class Getimagesinfos:
                         sys.exit("Unable to read metadata...")
                 timeofcreation.extend(tags1)
 
-        print('DONE Loading Metadata...')
+        logging.debug('DONE Loading Metadata...')
         self.timeofcreation = timeofcreation
         return timeofcreation
 
@@ -215,14 +217,14 @@ class Getimagesinfos:
         for group in groups:
             impgtemp.append(len(group))
         impg.extend(impgtemp)
-        print('Done Creating image sequences')
+        logging.debug('Done Creating image sequences')
         return impg
 
 
 class Imagesanalysis(Getimagesinfos):
     """Analyze images to detect moving objects.
 
-    Parent: 
+    Parent:
         Getimagesinfos
 
     """
@@ -274,9 +276,9 @@ class Imagesanalysis(Getimagesinfos):
         tempdir = srcdir + '/temp1'
 
         for sequence in range(len(impg)):
-            print("Analyzing sequence ", sequence + 1)
-            print(impg)
-            print("range", range(impg[sequence]))
+            logging.debug("Analyzing sequence ", sequence + 1)
+            logging.debug(impg)
+            logging.debug("range", range(impg[sequence]))
             for image in range(impg[sequence]):
 
                 if not os.path.exists(tempdir):
@@ -286,18 +288,17 @@ class Imagesanalysis(Getimagesinfos):
                 imggray1 = cv2.cvtColor(currentFrame.copy(),
                                         cv2.COLOR_BGR2GRAY)
                 imggray2 = imggray1[120:-10, 1:-10]
-                avgB = cv2.mean(imggray2)
                 tfcd = open('/tmp/params.txt', 'w')
                 tfcd.write(str(0.001))
                 resizimg1 = cv2.resize(currentFrame, (0, 0), fx=0.3, fy=0.3)
-                print("images", image)
+                logging.debug("images", image)
                 formatedname = os.path.join(tempdir, os.path.basename(
                     sortedimglist[image + int(
                         sum(impg[0:sequence]))]))
                 formatedname = os.path.splitext(formatedname)[0]+'.jpg'
-                print(formatedname)
+                logging.debug(formatedname)
                 cv2.imwrite(formatedname, resizimg1)
-                print("Saving resized image as", formatedname)
+                logging.debug("Saving resized image as", formatedname)
             cppcom1 = ["EstimateBackground", tempdir + '/', 'EstBG']
             cppcom = ' '.join(cppcom1)
             cppcom2 = ["ForegroundSegmentation", tempdir + '/',
@@ -323,7 +324,7 @@ class Imagesanalysis(Getimagesinfos):
         """
         resultslist = []
         for i in range(len(self.maskslist)):
-            print("Analyzing", self.maskslist[i])
+            logging.debug("Analyzing", self.maskslist[i])
             currentMask1 = cv2.imread(self.maskslist[i])
             currentMask2 = currentMask1[100:-20, 1:-10]
             opened = cv2.morphologyEx(currentMask2,
@@ -353,7 +354,7 @@ class Imagesanalysis(Getimagesinfos):
                         imgresult = 0
                 resultrow = [self.maskslist[i], imgresult,
                              parameters.minsize[k]]
-                print(resultrow)
+                logging.debug(resultrow)
             resultslist.append(resultrow)
         self.resultslist = resultslist
         return resultslist
